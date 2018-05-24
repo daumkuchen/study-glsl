@@ -6,7 +6,7 @@ uniform float time;
 
 float pi = 3.14159265;
 
-float perlin(vec3 p) {
+float rnd(vec3 p) {
   vec3 i = floor(p);
   vec4 a = dot(i, vec3(1., 57., 21.)) + vec4(0., 57., 21., 78.);
   vec3 f = cos((p - i) * pi * 10.0) * (-.5) + .5;
@@ -17,5 +17,5 @@ float perlin(vec3 p) {
 
 void main(void) {
 	vec2 position = (gl_FragCoord.xy / resolution.xy);
-  gl_FragColor = vec4(vec3(perlin(position.xyy * 32.0) * 10.0), 1.0);
+  gl_FragColor = vec4(vec3(rnd(position.xyy * 32.0) * 10.0), 1.0);
 }

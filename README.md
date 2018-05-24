@@ -7,5 +7,7 @@
 * 004 geometry
 * 005 mandelbrot set
 * 006 julia set
-* 007 noise
-* 008 noise
+* 007 random
+* 008 random
+* 009 noise
+* 010 noise
