@@ -11,3 +11,7 @@
 * 008 random
 * 009 noise
 * 010 noise
+* 011 color bar using step
+* 012 stripe
+* 013 fractal
+* 014
