@@ -37,7 +37,7 @@ void main(void) {
 
     // Maze
     color = smoothstep(tile.x-0.3,tile.x,tile.y)-
-            smoothstep(tile.x,tile.x+0.3,tile.y);
+            smoothstep(tile.x,tile.x+0.3,tile.y) * tan(time * 10.0);
 
     // Circles
     // color = (step(length(tile),0.6) -
