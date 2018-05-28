@@ -1,8 +1,11 @@
+#ifdef GL_ES
 precision mediump float;
-uniform vec2  resolution;     // resolution (width, height)
-uniform vec2  mouse;          // mouse      (0.0 ~ 1.0)
-uniform float time;           // time       (1second == 1.0)
-uniform sampler2D backbuffer; // previous scene texture
+#endif
+
+uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
+uniform sampler2D backbuffer;
 
 void main(){
     vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
@@ -25,7 +28,9 @@ void main(){
 }
 
 /*
+#ifdef GL_ES
 precision mediump float;
+#endif
 uniform vec2  resolution;     // resolution (width, height)
 uniform vec2  mouse;          // mouse      (0.0 ~ 1.0)
 uniform float time;           // time       (1second == 1.0)

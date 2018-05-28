@@ -1,7 +1,10 @@
-precision highp float;
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 resolution;
+uniform vec2 mouse;
 uniform float time;
-uniform vec2  mouse;
-uniform vec2  resolution;
 
 // =========================
 // UTILITY

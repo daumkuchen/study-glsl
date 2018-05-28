@@ -1,7 +1,10 @@
+#ifdef GL_ES
 precision mediump float;
-uniform float time;
-uniform vec2 mouse;
+#endif
+
 uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
 
 float map(vec3 p) {
 	return length(mod(p, 2.0) - 1.0) - 0.3;

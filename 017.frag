@@ -1,12 +1,13 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
+
 //おまけ。これもマーキュリーのシェーダーから
 //ノイズ書くの面倒ですぐプレビズ作りたい場合は、以下のperlinnoiseが便利です(出典はURLから)
-
-precision mediump float;
-
-uniform float time;
-uniform vec2 mouse;
-uniform vec2 resolution;
-
 //http://www.pouet.net/topic.php?which=7920&page=18&x=31&y=14
 
 #define pi 3.14159265
