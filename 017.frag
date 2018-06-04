@@ -5,22 +5,60 @@ precision mediump float;
 uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
+uniform sampler2D backbuffer;
 
-//おまけ。これもマーキュリーのシェーダーから
-//ノイズ書くの面倒ですぐプレビズ作りたい場合は、以下のperlinnoiseが便利です(出典はURLから)
-//http://www.pouet.net/topic.php?which=7920&page=18&x=31&y=14
-
-#define pi 3.14159265
-float perlin(vec3 p) {
-  vec3 i = floor(p);
-  vec4 a = dot(i, vec3(1., 57., 21.)) + vec4(0., 57., 21., 78.);
-  vec3 f = cos((p-i)*pi)*(-.5)+.5;
-  a = mix(sin(cos(a)*a),sin(cos(1.+a)*(1.+a)), f.x);
-  a.xy = mix(a.xz, a.yw, f.y);
-  return mix(a.x, a.y, f.z);
+// distance function
+float distanceSphere(vec3 ray){
+	float dist = length(ray) - 1.0;
+	return dist;
 }
 
-void main( void ) {
-  vec2 position = ( gl_FragCoord.xy / resolution.xy ) + mouse / 4.0;
-  gl_FragColor = vec4(vec3(perlin(position.xyy * 64.0)), 1.0);
+// repetition distance function
+float repetitionSphere(vec3 ray){
+	float dist = length(mod(ray, 2.0) - 1.0) - 0.25;
+	return dist;
+}
+
+// distance hub
+float distanceHub(vec3 ray){
+	return repetitionSphere(ray);
+}
+
+// generate normal
+vec3 genNormal(vec3 ray){
+  float d = 0.001;
+  return normalize(vec3(
+	  distanceHub(ray + vec3(  d, 0.0, 0.0)) - distanceHub(ray + vec3( -d, 0.0, 0.0)),
+	  distanceHub(ray + vec3(0.0,   d, 0.0)) - distanceHub(ray + vec3(0.0,  -d, 0.0)),
+	  distanceHub(ray + vec3(0.0, 0.0,   d)) - distanceHub(ray + vec3(0.0, 0.0,  -d))
+  ));
+}
+
+void main(){
+
+    vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+
+    // ray direction
+    vec3 dir = normalize(vec3(p, -1.0));
+
+    // origin position
+		// レイの原点
+    vec3 origin = vec3(0.0, 0.0, 3.0 - time);
+
+    // marching loop
+		// rayの初期位置はorigin
+    vec3 ray = origin;
+		float dist = 0.0;
+    for(int i = 0; i < 32; ++i){
+			dist = distanceHub(ray);
+    	ray += dir * dist;
+    }
+
+    // distance check
+		vec3 normal = vec3(0.0);
+		if(dist < 0.001){
+			normal = genNormal(ray);
+		}
+
+		gl_FragColor = vec4(normal, 1.0);
 }

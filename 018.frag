@@ -5,73 +5,35 @@ precision mediump float;
 uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
-uniform sampler2D backbuffer;
 
-// distance function
-// 距離関数
-float distanceSphere(vec3 ray){
-	float dist = length(ray) - 1.0;
-	return dist;
+float map(vec3 p) {
+	return length(mod(p, 2.0) - 1.0) - 0.3;
 }
 
-// vec3 p = 0.0;
-// vec3 b = 0.0;
-// float r;
-// float distanceSphere(vec3 p, vec3 b, float r) {
-//   return length(max(abs(p)-b,0.0))-r;
-// }
-
-// repetition distance function
-float repetitionSphere(vec3 ray){
-	float dist = length(mod(ray, 2.0) - 1.0) - 0.25;
-	return dist;
+vec2 rot(vec2 p, float a) {
+	return vec2(
+	cos(a) * p.x - sin(a) * p.y,
+	sin(a) * p.x + cos(a) * p.y);
 }
 
-// distance hub
-float distanceHub(vec3 ray){
-	return repetitionSphere(ray);
-}
+void main( void ) {
+	vec2 uv = ( gl_FragCoord.xy / resolution.xy ) * 2.0 - 1.0;
 
-// generate normal
-vec3 genNormal(vec3 ray){
-  float d = 0.001;
-  return normalize(vec3(
-	  distanceHub(ray + vec3(  d, 0.0, 0.0)) - distanceHub(ray + vec3( -d, 0.0, 0.0)),
-	  distanceHub(ray + vec3(0.0,   d, 0.0)) - distanceHub(ray + vec3(0.0,  -d, 0.0)),
-	  distanceHub(ray + vec3(0.0, 0.0,   d)) - distanceHub(ray + vec3(0.0, 0.0,  -d))
-  ));
-}
+	uv.x *= resolution.x / resolution.y;
 
+	vec3 pos = vec3(0, 0, time);
+	vec3 dir = normalize(vec3(uv, 1.0));
+	dir.xy = rot(dir.xy, time * 0.05);
+	dir.zy = rot(dir.zy, time * 0.05);
 
-void main(){
-    vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+	float t = 0.0;
+	for(int i = 0 ; i < 75; i++) {
+		t += map(t * dir + pos);
+	}
 
-    // ray direction
-    vec3 dir = normalize(vec3(p, -1.0));
+	vec3 ip = t * dir + pos;
+	gl_FragColor = vec4(vec3(t * 0.03) + map(ip + 0.1) + dir * 0.3, 1.0);
+	float V = max(1.0 - dot(uv * 0.3, uv), 0.0);
+	gl_FragColor.xyz *= V;
 
-    // origin position
-		// レイが飛んでいく原点
-    vec3 origin = vec3(0.0, 0.0, 3.0 - time);
-
-    // marching loop
-		// rayの初期位置はorigin
-    vec3 ray = origin;
-		float dist = 0.0;
-    for(int i = 0; i < 32; ++i){
-			dist = distanceHub(ray);
-    	ray += dir * dist;
-    }
-
-    // distance check
-		vec3 normal = vec3(0.0);
-		if(dist < 0.001){
-			normal = genNormal(ray);
-		}
-    // float f = 0.0;
-    // if(ray.z > 31.0){
-    // 	f = 1.0;
-    // }
-
-		gl_FragColor = vec4(normal, 1.0);
-    // gl_FragColor = vec4(vec3(f), 1.0);
 }
