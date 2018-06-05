@@ -7,21 +7,29 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-void main(){
+void main(void) {
 
-  vec2 position = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+    vec2 position = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 
-  float ellipse = 1.0 / length(vec2(position.x, position.y));
-        ellipse = float(ellipse);
+    // pale
+    // for(float i = 1.0; i < 3.0; i++) {
+    //   position.x += 0.3 / i * sin(i * 3.0 * position.y + time * 0.1 + cos((time / (100. * i)) * i));
+    //   position.y += 0.4 / i * cos(i * 3.0 * position.x + time * 2.1 + sin((time / (200. * i)) * i));
+    // }
+    // float r = cos(position.x + position.y + 2.) * .5 + .5;
+    // float g = sin(position.x + position.y + 1.) * .5 + .5;
+    // float b = r + g * 2.0;
 
-  float rect = 1.0 / length(vec2(position.x, position.y) * 2.0);
-        rect = floor(rect);
+    // hard
+    for(float i = 1.0; i < 10.0; i++) {
+      position.x += 0.3 / i * sin(i * 3.0 * position.y + (time * 0.1) + cos((time / (10.0 * i)) * i));
+      position.y += 0.4 / i * cos(i * 3.0 * position.x + (time * 0.5) + sin((time / (20.0 * i)) * i));
+    }
+    float r = cos(position.x + position.y + 2.0) * 0.5 + 0.5;
+    float g = sin(position.x + position.y + 1.0) * 0.5 + 0.5;
+    float b = r + g * 2.0;
 
+    vec3 color = vec3(r, g, b);
 
-
-
-  vec3 color = vec3(rect);
-
-  gl_FragColor = vec4(color, 0);
-
+    gl_FragColor = vec4(color, 1);
 }
