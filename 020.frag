@@ -7,10 +7,6 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-//---------------------------------------------------------
-// MACROS
-//---------------------------------------------------------
-
 #define EPS       0.0001
 #define PI        3.14159265
 #define HALFPI    1.57079633
@@ -18,18 +14,10 @@ uniform sampler2D backbuffer;
 #define EQUALS(A,B) ( abs((A)-(B)) < EPS )
 #define EQUALSZERO(A) ( ((A)<EPS) && ((A)>-EPS) )
 
-//---------------------------------------------------------
-// GLOBALS
-//---------------------------------------------------------
-
 vec2 origin = vec2(0.0);
 vec2 uv, pos, pmouse, uvUnit;
 float aspect;
 bool isLive;
-
-//---------------------------------------------------------
-// UTILS
-//---------------------------------------------------------
 
 float circle (vec2 center, float radius) {
   return distance(center, pos) < radius ? 1.0 : 0.0;
@@ -43,10 +31,6 @@ float rect (vec2 center, vec2 b) {
     pos.x < bMax.x && pos.y < bMax.y ) ?
     1.0 : 0.0;
 }
-
-//---------------------------------------------------------
-// PROGRAM
-//---------------------------------------------------------
 
 int countNeighbors(vec2 p) {
   int count = 0;
@@ -89,10 +73,6 @@ vec3 ghosting() {
   #define DECAY 0.90
   return DECAY * texture2D(backbuffer, uv).rgb;
 }
-
-//---------------------------------------------------------
-// MAIN
-//---------------------------------------------------------
 
 void main(void) {
   aspect = resolution.x/resolution.y;

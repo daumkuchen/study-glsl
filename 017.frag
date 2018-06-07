@@ -41,7 +41,7 @@ void main(){
     // ray direction
     vec3 dir = normalize(vec3(p, -1.0));
 
-    // origin position
+    // origin p
 		// レイの原点
     vec3 origin = vec3(0.0, 0.0, 3.0 - time);
 

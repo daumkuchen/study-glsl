@@ -6,17 +6,9 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
 
-// =========================
-// UTILITY
-// =========================
-
 float map(vec3 p) {
 	return length(mod(p, 2.0) - 1.0) - 0.3;
 }
-
-// =========================
-// MODEL
-// =========================
 
 const float modelSize = 1.0;
 
@@ -55,23 +47,15 @@ vec3 getNormal(vec3 p) {
     );
 }
 
-// =========================
-// ANIMATION
-// =========================
-
 vec2 rot(vec2 p, float a) {
 	return vec2(
 	cos(a) * p.x - sin(a) * p.y,
 	sin(a) * p.x + cos(a) * p.y);
 }
 
-// =========================
-// MAIN
-// =========================
-
 void main(void){
 
-  // fragment position
+  // fragment p
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 
   // camera

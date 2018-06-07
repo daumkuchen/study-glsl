@@ -80,6 +80,6 @@ float cnoise(vec3 P){
 }
 
 void main(void) {
-	vec2 position = (gl_FragCoord.xy / resolution.xy);
-  gl_FragColor = vec4(vec3(cnoise(position.xyy * 32.0) * 10.0), 1.0);
+	vec2 p = (gl_FragCoord.xy / resolution.xy);
+  gl_FragColor = vec4(vec3(cnoise(p.xyy * 32.0) * 10.0), 1.0);
 }

@@ -8,17 +8,15 @@ uniform float time;
 
 void main(void) {
 
-  // マウス座標の正規化
   vec2 mouse = vec2(mouse.x * 2.0 - 1.0, mouse.y * 2.0 - 1.0);
 
-  // フラグメント座標の正規化
-  vec2 position = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+  vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 
   // カウンタ
   int count = 0;
 
   // 原点を少しずらす
-  vec2 originPos = position + vec2(-0.5, 0.0);
+  vec2 originPos = p + vec2(-0.5, 0.0);
 
   // マウス座標を使って拡大度を変更
   float zoom = 1.5 - mouse.x * 0.5;

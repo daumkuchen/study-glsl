@@ -18,6 +18,6 @@ float rnd(vec3 p) {
 }
 
 void main(void) {
-	vec2 position = (gl_FragCoord.xy / resolution.xy);
-  gl_FragColor = vec4(vec3(rnd(position.xyy * 32.0) * 10.0), 1.0);
+	vec2 p = (gl_FragCoord.xy / resolution.xy);
+  gl_FragColor = vec4(vec3(rnd(p.xyy * 32.0) * 10.0), 1.0);
 }
