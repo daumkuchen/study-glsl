@@ -126,7 +126,7 @@ float noise(vec3 p){
 
 void main(void){
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-  p *= 0.8;
+  p *= 0.5;
   vec2 pos = vec2(p) * 2.0;
   float r = snoise(vec3(pos.x, pos.y + 0.02, time * 1.0)) * 0.8;
   float g = snoise(vec3(pos.x, pos.y + 0.05, time * 1.0)) * 2.0;
