@@ -2,14 +2,14 @@
 precision mediump float;
 #endif
 
-uniform float time;
 uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
+uniform sampler2D backbuffer;
 
-float random (in vec2 st) {
-    return fract(sin(dot(st.xy,
-                         vec2(12.9898,78.233)))
-                * 437sssssss58.5453123);
-}sssssssss
+float random(vec2 st) {
+  return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
 
 float noise(vec2 st) {
     vec2 i = floor(st);
@@ -35,12 +35,12 @@ float lines(in vec2 pos, float b){
 }
 
 void main(void){
-    vec2 st = gl_FragCoord.xy/resolution.xy;
-    st.x *= resolution.x/resolution.y;
-    vec2 pos = st.xy*vec2(1.0, 1.0);
-    float pattern = 0.0;
-    pos = rotate2d( noise(pos * 0.5 + time * 2.0) * 3.0) * pos;
-    pattern = 1.0 - lines(pos, 0.28) * 4.0;
-    vec3 col = vec3(pattern, pattern, pattern) * vec3(0.7, 1.0, 1.5);
-    gl_FragColor = vec4(vec3(col), 1.0);
+  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+       p*= 0.8;
+  vec2 pos = p.xy*vec2(1.0, 1.0);
+  float pattern = 0.0;
+  pos = rotate2d(noise(pos * 0.5 + time * 0.2) * 3.0) * pos;
+  pattern = 1.0 - lines(pos, 0.2) * 2.0;
+  vec3 color = vec3(pattern, pattern, pattern) * vec3(0.8, 1.0, 1.5);
+  gl_FragColor = vec4(vec3(color), 1.0);
 }
