@@ -29,7 +29,7 @@ mat2 rotate2d(float angle){
 float lines(in vec2 pos, float b){
     float scale = 10.0;
     pos *= scale;
-    return smoothstep(0.0, .5 + b * .5, abs((sin(pos.x*3.1415)+b*2.0))*.5);
+    return smoothstep(0.0, .5 + b * .5, ceil((sin(pos.x*3.1415)+b*2.0))*.5);
 }
 
 void main(void){
@@ -39,6 +39,6 @@ void main(void){
   float pattern = 0.0;
   pos = rotate2d(noise(pos * 0.5 + time * 0.2) * 3.0) * pos;
   pattern = 1.0 - lines(pos, 0.2) * 2.0;
-  vec3 color = vec3(pattern, pattern, pattern) * vec3(0.3, 0.6, 1.0);
+  vec3 color = vec3(pattern, pattern, pattern) * vec3(1.0, 1.0, 1.0);
   gl_FragColor = vec4(vec3(color), 1.0);
 }
