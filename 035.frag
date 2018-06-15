@@ -52,15 +52,38 @@ float udRoundBox(vec3 p) {
 // torus
 const vec2 t = vec2(0.75, 0.25);
 float sdTorus(vec3 p) {
-  vec2 q = vec2(length(p.xz)-t.x,p.y);
+  // 横
+  // vec2 q = vec2(length(p.xz) - t.x, p.y);
+  // 縦
+  vec2 q = vec2(length(p.xy) - t.x, p.z);
   return length(q)-t.y;
+}
+
+// floor
+float sdFloor(vec3 p){
+  return length(max(abs(p) - vec3(1.0, 0.1, 0.5), 0.0)) - 0.1;
 }
 
 // distanceFunc
 float distanceFunc(vec3 p){
+
   // rotate
   vec3 q = rotate(p, radians(time * 10.0), vec3(1.0, 0.5, 0.0));
-	return udRoundBox(q);
+
+  // 重なった部分のみ
+  // return max(sdTorus(q), sdFloor(q));
+
+  // 重なっていない部分のみ
+  return min(sdTorus(q), sdFloor(q));
+
+  // トーラス分を除外
+  // return max(-sdTorus(q),  sdFloor(q));
+  // return max( sdTorus(q), -sdFloor(q));
+
+  // ボックス分を除外
+  // return max( sdTorus(q), -sdFloor(q));
+  // return max(-sdTorus(q),  sdFloor(q));
+
 }
 
 // getNormal
@@ -99,7 +122,7 @@ void main(void){
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
 
 		// レンダリング
-    gl_FragColor = vec4(vec3(diff) * 1.0, 1.0);
+    gl_FragColor = vec4(vec3(diff), 1.0);
 
   } else {
 

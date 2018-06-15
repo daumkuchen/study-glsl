@@ -37,6 +37,12 @@ vec3 rotate(vec3 p, float angle, vec3 axis){
     return m * p;
 }
 
+// 補間用
+float smoothMin(float d1, float d2, float k){
+  float h = exp(-k * d1) + exp(-k * d2);
+  return -log(h) / k;
+}
+
 // sphere
 float sdSphere(vec3 p) {
   return length(p) - size;
@@ -52,15 +58,26 @@ float udRoundBox(vec3 p) {
 // torus
 const vec2 t = vec2(0.75, 0.25);
 float sdTorus(vec3 p) {
-  vec2 q = vec2(length(p.xz)-t.x,p.y);
+  // 横
+  // vec2 q = vec2(length(p.xz) - t.x, p.y);
+  // 縦
+  vec2 q = vec2(length(p.xy) - t.x, p.z);
   return length(q)-t.y;
+}
+
+// floor
+float sdFloor(vec3 p){
+  return length(max(abs(p) - vec3(1.0, 0.1, 0.5), 0.0)) - 0.1;
 }
 
 // distanceFunc
 float distanceFunc(vec3 p){
+
   // rotate
   vec3 q = rotate(p, radians(time * 10.0), vec3(1.0, 0.5, 0.0));
-	return udRoundBox(q);
+
+  return smoothMin(sdTorus(q), sdFloor(q), 10.0);
+
 }
 
 // getNormal
@@ -99,7 +116,7 @@ void main(void){
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
 
 		// レンダリング
-    gl_FragColor = vec4(vec3(diff) * 1.0, 1.0);
+    gl_FragColor = vec4(vec3(diff), 1.0);
 
   } else {
 
