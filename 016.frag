@@ -16,22 +16,9 @@ float sdSphere(vec3 p) {
   return length(p) - modelSize;
 }
 
-// float udBox(vec3 p, vec3 b) {
-//   return length(max(abs(p)-b,0.0));
-// }
-//
-// float sdTorus(vec3 p, vec2 t) {
-//   vec2 q = vec2(length(p.xz)-t.x,p.y);
-//   return length(q)-t.y;
-// }
-
 float distanceFunc(vec3 p){
   return length(p) - modelSize;
 }
-
-// =========================
-// NORMAL
-// =========================
 
 vec3 getNormal(vec3 p) {
   const float d = 0.0001;

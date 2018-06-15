@@ -74,7 +74,7 @@ vec3 ghosting() {
   return DECAY * texture2D(backbuffer, uv).rgb;
 }
 
-void main(void) {
+void main(void){
   aspect = resolution.x/resolution.y;
   uvUnit = 1.0 / resolution.xy;
 
