@@ -14,7 +14,7 @@ uniform sampler2D backbuffer;
 const float PI = 3.14159265;
 const float angle = 60.0;
 const float fov = angle * 0.5 * PI / 180.0;
-const float size = 1.0;
+const float size = 0.8;
 const vec3 lightDir = vec3(-0.5, 0.5, 0.5);
 
 // rotate
@@ -90,7 +90,8 @@ float sdFloor(vec3 p){
 // distanceFunc
 float distanceFunc(vec3 p){
   // vec3 q = rotate(p, radians(time * 20.0), vec3(1.0, 1.0, 1.0));
-  return smoothMin(sdSphere(trans(vec3(p.x, p.y + time, p.z))), sdFloor(trans(p)), 5.0);
+  // return smoothMin(sdSphere(trans(vec3(p.x, p.y + time, p.z))), sdFloor(trans(p)), 5.0);
+  return smoothMin(sdSphere(trans(vec3(p.x, p.y - 0.95, p.z))), sdFloor(trans(p)), 5.0);
 }
 
 // getNormal
@@ -128,12 +129,12 @@ void main(void){
 		vec3 normal = getNormal(rPos);
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0) * 1.2;
 
-    vec3 color = vec3(1.5, 1.5, 1.5);
+    vec3 color = vec3(1.25, 1.25, 1.25);
     gl_FragColor = vec4(vec3(diff * color), 1.0);
 
   } else {
 
-    vec3 bg = vec3(1.0, 0.2, 0.2);
+    vec3 bg = vec3(0.0, 0.0, 0.0);
     gl_FragColor = vec4(bg, 1.0);
 
   }
