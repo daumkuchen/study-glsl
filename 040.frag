@@ -115,7 +115,7 @@ void main(void){
 
 		// cPosから法線を取得
 		vec3 normal = getNormal(rPos);
-    float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
+    float diff = clamp(dot(lightDir, normal), 0.1, 1.0) * 1.5;
 
 		// レンダリング
     gl_FragColor = vec4(vec3(diff), 1.0);
