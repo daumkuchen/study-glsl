@@ -14,7 +14,7 @@ uniform sampler2D backbuffer;
 const float PI = 3.14159265;
 const float angle = 60.0;
 const float fov = angle * 0.5 * PI / 180.0;
-const float size = 0.8;
+const float size = 1.0;
 const vec3 lightDir = vec3(-0.5, 0.5, 0.5);
 
 // rotate
@@ -47,17 +47,32 @@ vec3 twist(vec3 p, float power){
       s, 0.0,   c
   );
   return m * p;
+
+  // mat2 m = mat2(c,-s,s,c);
+  // vec3 q = vec3(m*p.xz,p.y);
+  // return q;
 }
 
-// 補間用
+// cheapBend
+vec3 cheapBend(vec3 p, float power){
+  float s = sin(power * p.y);
+  float c = cos(power * p.y);
+  // mat3 m = mat3(
+  //     c, 0.0,  -s,
+  //   0.0, 1.0, 0.0,
+  //     s, 0.0,   c
+  // );
+  // return m * p;
+
+  mat2 m = mat2(c,-s,s,c);
+  vec3 q = vec3(m*p.xy,p.z);
+  return q;
+}
+
+// smoothMin
 float smoothMin(float d1, float d2, float k){
   float h = exp(-k * d1) + exp(-k * d2);
   return -log(h) / k;
-}
-
-// trans
-vec3 trans(vec3 p){
-  return mod(p, 4.0) - 2.0;
 }
 
 // sphere
@@ -66,7 +81,7 @@ float sdSphere(vec3 p) {
 }
 
 // box
-const float b = 0.75;
+const float b = 0.5;
 const float r = 0.05;
 float udRoundBox(vec3 p) {
   return length(max(abs(p)-b,0.0))-r;
@@ -76,22 +91,32 @@ float udRoundBox(vec3 p) {
 const vec2 t = vec2(0.75, 0.25);
 float sdTorus(vec3 p) {
   // 横
-  // vec2 q = vec2(length(p.xz) - t.x, p.y);
+  vec2 q = vec2(length(p.xz) - t.x, p.y);
   // 縦
-  vec2 q = vec2(length(p.xy) - t.x, p.z);
+  // vec2 q = vec2(length(p.xy) - t.x, p.z);
   return length(q)-t.y;
 }
 
 // floor
+const vec3 f = vec3(0.1, 1.0, 0.5);
 float sdFloor(vec3 p){
-  return length(max(abs(p) - vec3(1.0, 0.1, 1.0), 0.0)) - 0.2;
+  return length(max(abs(p) - f, 0.0)) - 0.1;
 }
 
 // distanceFunc
 float distanceFunc(vec3 p){
-  // vec3 q = rotate(p, radians(time * 20.0), vec3(1.0, 1.0, 1.0));
-  // return smoothMin(sdSphere(trans(vec3(p.x, p.y + time, p.z))), sdFloor(trans(p)), 5.0);
-  return smoothMin(sdSphere(trans(vec3(p.x, p.y - 0.95 + time, p.z))), sdFloor(trans(p)), 5.0);
+
+  // rotate
+  vec3 q = rotate(p, radians(-45.0), vec3(1.0, 0.5, 0.0));
+
+  // twist
+  // vec3 q = twist(p, sin(time * 2.0) * 10.0);
+
+  // cheapBend
+  vec3 b = cheapBend(p, sin(time * 5.0)) * 0.2;
+
+  return sdFloor(q - b);
+
 }
 
 // getNormal
@@ -114,9 +139,9 @@ void main(void){
   // marching loop
 	float distance = 0.0;
 	float rLen = 0.0;
-  vec3 cPos = vec3(0.0, 0.0, 10.5);
+  vec3 cPos = vec3(0.0, 0.0, 3.0);
 	vec3 rPos = cPos;
-	for(int i = 0; i < 64; i++){
+	for(int i = 0; i < 128; i++){
 		distance = distanceFunc(rPos);
 		rLen += distance;
 		rPos = cPos + ray * rLen;
@@ -127,15 +152,15 @@ void main(void){
 
 		// cPosから法線を取得
 		vec3 normal = getNormal(rPos);
-    float diff = clamp(dot(lightDir, normal), 0.1, 1.0) * 1.2;
+    float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
 
-    vec3 color = vec3(1.25, 1.25, 1.25);
-    gl_FragColor = vec4(vec3(diff * color), 1.0);
+		// レンダリング
+    gl_FragColor = vec4(vec3(diff), 1.0);
 
   } else {
 
-    vec3 bg = vec3(0.0, 0.0, 0.0);
-    gl_FragColor = vec4(bg, 1.0);
+		// else部分は背景色
+    gl_FragColor = vec4(vec3(0.0), 1.0);
 
   }
 
