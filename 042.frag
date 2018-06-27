@@ -83,6 +83,6 @@ void main(void){
   float floor = sign((mod(s.x, 0.1) - 0.05) * (mod(s.y, 0.1) - 0.05));
         floor *= position.z * position.z * position.z;
 
-	color = vec3(floor + color.r * 2.0, floor + color.g * 2.0, floor + color.b * 2.0);
+	color = vec3(mod(floor + color.r * 1.5, 0.0), mod(floor + color.g * 1.5, 0.0), mod(floor + color.b * 1.5, 0.0));
 	gl_FragColor = vec4(color, 1.0);
 }
