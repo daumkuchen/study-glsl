@@ -91,19 +91,14 @@ float distanceFunc(vec3 p){
   // twist
   vec3 q = twist(p, sin(time * 2.0) * 10.0);
 
-  float d1 = sdTorus(p);
+  float t1 = sdTorus(r);
 
-  float d2 =
+  float d1 =
     sin(5.0 * p.x + (time * 0.2) * 12.0) *
     cos(5.0 * p.y + (time * 0.2) * 14.0) *
     sin(5.0 * p.z + (time * 0.2) * 20.0);
 
-  float d3 =
-    sin(4.0 * p.x + (time * 0.04) * 2.0) *
-    cos(4.0 * p.y + (time * 0.04) * 2.0) *
-    sin(4.0 * p.z + (time * 0.04) * 2.0);
-
-  return smoothMin(d1 + d2, d1, 2.0);
+  return smoothMin(t1, t1, 2.0);
 
 }
 
