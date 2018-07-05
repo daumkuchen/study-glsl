@@ -86,19 +86,28 @@ float sdFloor(vec3 p){
 float distanceFunc(vec3 p){
 
   // rotate
-  vec3 r = rotate(p, radians(time * 50.0), vec3(1.0, 1.0, 0.0));
+  vec3 r = rotate(p, radians(time * 50.0), vec3(1.0, 1.0, 1.0));
 
   // twist
-  vec3 q = twist(p, sin(time * 2.0) * 10.0);
+  vec3 t = twist(p, sin(time * 2.0) * 10.0);
 
   float t1 = sdTorus(r);
+  float s1 = sdSphere(r);
 
+  // displamaent
   float d1 =
-    sin(5.0 * p.x + (time * 0.2) * 12.0) *
-    cos(5.0 * p.y + (time * 0.2) * 14.0) *
-    sin(5.0 * p.z + (time * 0.2) * 20.0);
+    sin(4.0 * p.x + (time * 2.0)) *
+    cos(4.0 * p.y + (time * 2.0)) *
+    sin(4.0 * p.z + (time * 2.0));
 
-  return smoothMin(t1, t1, 2.0);
+  // boxel
+  float d2 =
+    mod(sin(4.0 * p.x + (time * 0.5)), 0.8) *
+    mod(cos(4.0 * p.y + (time * 0.5)), 0.8) *
+    mod(sin(4.0 * p.z + (time * 0.5)), 0.8);
+
+  return smoothMin(s1 + d1, s1 - d1, 1.0) * 0.5;
+  // return smoothMin(t1, t1, 2.0);
 
 }
 
@@ -122,7 +131,7 @@ void main(void){
   // marching loop
 	float distance = 0.0;
 	float rLen = 0.0;
-  vec3 cPos = vec3(0.0, 0.0, 3.0);
+  vec3 cPos = vec3(0.0, 0.0, 4.0);
 	vec3 rPos = cPos;
 	for(int i = 0; i < 128; i++){
 		distance = distanceFunc(rPos);
@@ -136,7 +145,12 @@ void main(void){
 		// cPosから法線を取得
 		vec3 normal = getNormal(rPos);
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
-    vec3 color = vec3(0.5, -0.3, 0.5);
+
+    // pink
+    // vec3 color = vec3(0.5, -0.3, 0.5);
+
+    // white
+    vec3 color = vec3(0.1);
 
 		// レンダリング
     gl_FragColor = vec4(vec3(color + diff), 1.0);
@@ -144,7 +158,8 @@ void main(void){
   } else {
 
 		// else部分は背景色
-    gl_FragColor = vec4(vec3(0.1, 0.9, 0.1), 1.0);
+    // gl_FragColor = vec4(vec3(0.1, 0.9, 0.1), 1.0);
+    gl_FragColor = vec4(vec3(0.0), 1.0);
 
   }
 
