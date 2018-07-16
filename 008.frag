@@ -25,7 +25,7 @@ vec2 truchetPattern(in vec2 _st, in float _index){
 void main(void){
 
   vec2 st = gl_FragCoord.xy/resolution.xy;
-    st *= 10.0;
+       st *= 10.0;
 
     // integer
     vec2 ipos = floor(st);
@@ -33,13 +33,13 @@ void main(void){
     // fraction
     vec2 fpos = fract(st);
 
-    vec2 tile = truchetPattern(fpos, random( ipos ));
+    vec2 tile = truchetPattern(fpos, random(ipos));
 
-    float color = 0.0;
+    float color = 0.5;
 
     // Maze
     color = smoothstep(tile.x-0.3,tile.x,tile.y)-
-            smoothstep(tile.x,tile.x+0.3,tile.y) * tan(time * 10.0);
+            smoothstep(tile.x,tile.x+0.3,tile.y) * tan(time / 120.0 * 110.0);
 
     // Circles
     // color = (step(length(tile),0.6) -
@@ -48,7 +48,7 @@ void main(void){
     //          step(length(tile-vec2(1.)),0.4) );
 
     // Truchet (2 triangles)
-    // color = step(tile.x,tile.y);
+    // color = step(tile.x,tile.y + sin(time * 2.0));
 
     gl_FragColor = vec4(vec3(color),1.0);
 }

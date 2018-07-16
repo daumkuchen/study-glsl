@@ -22,9 +22,9 @@ void main(void){
   float orb2 = 0.1 / length(vec2(posX2, posY2));
   float orb3 = 0.1 / length(vec2(posX3, posY3));
 
-  float r = ceil(orb1 + orb2 + orb3) * 1.0;
-  float g = ceil(orb1 + orb2 + orb3) * 0.8;
-  float b = ceil(orb1 + orb2 + orb3) * 0.5;
+  float r = abs(orb1 + orb2 + orb3) * 1.0;
+  float g = abs(orb1 + orb2 + orb3) * 0.8;
+  float b = abs(orb1 + orb2 + orb3) * 0.5;
 
   gl_FragColor = vec4(vec3(r, b, g), 1.0);
 }

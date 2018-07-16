@@ -89,7 +89,7 @@ float distanceFunc(vec3 p){
   vec3 q = rotate(p, radians(time * 10.0), vec3(1.0, 0.5, 0.0));
 
   // twist
-  // vec3 q = twist(p, sin(time * 2.0) * 10.0);
+  vec3 t = twist(p, sin(time * 2.0) * 10.0);
 
   // return smoothMin(sdTorus(p), sdFloor(p), 10.0);
 
@@ -135,7 +135,7 @@ void main(void){
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
 
 		// レンダリング
-    gl_FragColor = vec4(vec3(ceil(diff)), 1.0);
+    gl_FragColor = vec4(vec3(float(diff)), 1.0);
 
   } else {
 
