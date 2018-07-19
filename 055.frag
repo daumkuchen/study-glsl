@@ -14,6 +14,6 @@ float plasma(vec2 p, float q){
 void main(void){
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-  vec3 dest = vec3(plasma(p, 10.0));
+  vec3 dest = vec3(plasma(p + (time * 0.2), 10.0));
   gl_FragColor = vec4(dest, 1.0);
 }

@@ -56,3 +56,5 @@
 * 053 ikeda
 * 054 cellular noise
 * 055 plasma
+* 057 ring
+* 058 motion blur
