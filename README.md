@@ -52,5 +52,6 @@
 * 049 cellular noise
 * 050 ball
 * 051 ikeda
-* 052 cellular noise
-* 053 plasma
+* 052 ikeda
+* 053 cellular noise
+* 054 plasma
