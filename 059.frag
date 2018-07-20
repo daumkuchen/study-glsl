@@ -24,11 +24,17 @@ float rings(vec2 p){
 
 }
 
+vec2 trans(vec2 p){
+  float theta = atan(p.y, p.x);
+  float r = length(p);
+  return vec2(theta, r);
+}
+
 void main(void){
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-  vec3 dest = vec3(rings(p));
+  vec3 dest = vec3(rings(trans(p)));
 
 
-  gl_FragColor = vec4(dest, 1.0);
+  gl_FragColor = vec4(dest * 0.2, 1.0);
 }
