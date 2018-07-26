@@ -5,6 +5,7 @@ precision mediump float;
 uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
+uniform sampler2D backbuffer;
 
 vec2 random2(vec2 p){
   return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
@@ -46,11 +47,19 @@ void main(void){
   color += 1.0 - step(0.001, m_dist);
   color.r += step(1.0, f_st.x) + step(1.0, f_st.y);
 
-  float r = 1.0 - color.r * abs(m_dist * 1.2) / 0.02 + 1.0;
-  float g = 1.0 - color.g * abs(m_dist * 1.2) / 0.02 + 1.0;
-  float b = 1.0 - color.b * abs(m_dist * 1.2) / 0.02 + 1.0;
+  float r = 1.0 - color.r * abs(m_dist * 1.2) / 0.05 + 1.0;
+  float g = 1.0 - color.g * abs(m_dist * 1.2) / 0.05 + 1.0;
+  float b = 1.0 - color.b * abs(m_dist * 1.2) / 0.05 + 1.0;
 
   vec3 c = vec3(r, g, b);
   vec4 dest = vec4(c, 1.0);
+
   gl_FragColor = vec4(dest);
+
+  // if(distance(p, c.xy) < 10.0){
+  //   gl_FragColor = vec4(dest);
+  // } else {
+  //   gl_FragColor = texture2D(backbuffer, p) * 1.0;
+  // }
+
 }
