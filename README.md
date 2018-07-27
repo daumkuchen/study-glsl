@@ -60,3 +60,4 @@
 * 057 motion blur
 * 058 ring
 * 059 ring(fract)
+* 060 fire
