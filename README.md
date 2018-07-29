@@ -61,3 +61,5 @@
 * 058 ring
 * 059 ring(fract)
 * 060 fire
+* 061 sample(scratch)
+* 062 raymarching(scratch)
