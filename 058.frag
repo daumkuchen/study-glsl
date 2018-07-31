@@ -26,15 +26,18 @@ float rings(vec2 p){
 
 vec2 trans(vec2 p){
 
+  // 極座標
   // float theta = atan(p.y, p.x);
   // float r = length(p);
   // return vec2(theta, r);
 
+  // 極座標
   // float theta = atan(p.y, p.x);
   // float r = length(p);
   // const float radius = 1.0;
   // return vec2(theta, radius/r);
 
+  // sphere
   float tx = acos(-p.x / sqrt(1.0 - p.y * p.y)) + time;
   float ty = asin(p.y);
   float r = length(p);
@@ -44,9 +47,10 @@ vec2 trans(vec2 p){
 
 void main(void){
 
-  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-  vec3 dest = vec3(rings(trans(p)));
+  vec2 p = (gl_FragCoord.xy * 2.0 - resolution);
+       p /= min(resolution.x, resolution.y);
 
+  vec3 dest = vec3(rings(trans(p)));
 
   gl_FragColor = vec4(dest, 1.0);
 }
