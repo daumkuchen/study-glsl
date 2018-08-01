@@ -54,9 +54,9 @@ float distanceFunc(vec3 p) {
   float t1 = sdTorus(r, vec2(1., .5));
 
   float d1 =
-    (sin(.8 * r.x * 1.0)) *
-    (sin(.8 * r.y * 1.0)) *
-    (sin(.8 * r.z * 1.0));
+    (sin(.8 * r.x * 10.0)) *
+    (sin(.8 * r.y * 10.0)) *
+    (sin(.8 * r.z * 10.0));
 
   // return smoothMin(t1 + d1, t1 - d1, .1);
 
