@@ -61,6 +61,7 @@
 * 058 ring
 * 059 ring(fract)
 * 060 fire
-* 061 sample(scratch)
-* 062 raymarching(scratch)
+* 061 sample
+* 062 raymarching
 * 063 hsv
+* 064 raymarching
