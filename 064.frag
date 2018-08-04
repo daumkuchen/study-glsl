@@ -62,8 +62,10 @@ float distanceFunc(vec3 p) {
   vec3 r = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
   vec3 t = twist(p, sin(time * 4.0) * 10.0);
 
+  vec3 t2 = twist(r, sin(time * 1.0) * 4.0);
+
   float s1 = sdSphere(r, 1.);
-  float t1 = sdTorus(t, vec2(1., .5));
+  float t1 = sdTorus(t2, vec2(1., .5));
 
   float d1 =
     (sin(.8 * r.x * 10.0)) *
