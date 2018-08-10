@@ -13,7 +13,10 @@ void main( void ) {
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 
-  vec3 dest = vec3(p, 1.0);
+  float circle = 1.0 - length(p) * .5;
+        circle = circle + cos(time * 2.);
+
+  vec3 dest = vec3(p + circle, 1.0);
 
   gl_FragColor = vec4(dest, 1);
 
