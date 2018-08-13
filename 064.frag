@@ -88,7 +88,7 @@ float distanceFunc(vec3 p) {
 
   // return sdSphere(trans(vec3(p.x, p.y - 0.95 + time, p.z))), sdFloor(trans(p));
 
-  return trans1;
+  return t1;
 
 }
 
@@ -136,7 +136,7 @@ void main(void){
     vec3 ambientColor = min(ambient + diffuse, 1.);
 
     // vec3 color = vec3(.1);
-    vec3 color = vec3(.5 - uv, 1.);
+    vec3 color = vec3(1. - uv, 1.);
 
     vec3 dest = (color * ambientColor) + vec3(specular);
 

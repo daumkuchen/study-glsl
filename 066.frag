@@ -14,8 +14,8 @@ void main( void ) {
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy);
        p /= min(resolution.x, resolution.y);
 
-  float px = p.x + sin(time * .4);
-  float py = p.y + cos(time * .4);
+  float px = p.x + sin(time * 0.);
+  float py = p.y + cos(time * 0.);
 
   float c1 = length(px * py);
 
