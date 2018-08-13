@@ -33,6 +33,10 @@ vec3 rotate(vec3 p, float angle, vec3 axis){
   return m * p;
 }
 
+vec3 trans(vec3 p, float c) {
+  return mod(p, c) - (c * .5);
+}
+
 vec3 twist(vec3 p, float power){
   float s = sin(power * p.y);
   float c = cos(power * p.y);
@@ -59,13 +63,17 @@ float sdTorus(vec3 p, vec2 t){
 }
 
 float distanceFunc(vec3 p) {
-  vec3 r = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
-  vec3 t = twist(p, sin(time * 4.0) * 10.0);
 
-  vec3 t2 = twist(r, sin(time * 1.0) * 4.0);
+  vec3 r = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
+
+  // vec3 t = twist(p, sin(time * 4.0) * 10.0);
+  vec3 twist1 = twist(r, sin(time * 2.) * 1.);
 
   float s1 = sdSphere(r, 1.);
-  float t1 = sdTorus(t2, vec2(1., .5));
+  float t1 = sdTorus(twist1, vec2(1., .5));
+
+  // trans
+  float trans1 = sdTorus(trans(vec3(p.x, r.y, r.z), 3.), vec2(1., .4));
 
   float d1 =
     (sin(.8 * r.x * 10.0)) *
@@ -77,7 +85,10 @@ float distanceFunc(vec3 p) {
   // noise
   // return (t1 * d1);
 
-  return t1;
+
+  // return sdSphere(trans(vec3(p.x, p.y - 0.95 + time, p.z))), sdFloor(trans(p));
+
+  return trans1;
 
 }
 
@@ -124,7 +135,8 @@ void main(void){
 
     vec3 ambientColor = min(ambient + diffuse, 1.);
 
-    vec3 color = vec3(.1);
+    // vec3 color = vec3(.1);
+    vec3 color = vec3(.5 - uv, 1.);
 
     vec3 dest = (color * ambientColor) + vec3(specular);
 
@@ -132,7 +144,8 @@ void main(void){
 
   } else {
 
-    vec3 color = vec3(.1);
+    // vec3 color = vec3(.1);
+    vec3 color = vec3(uv, 1.);
 
     float vignette = 1.5 - length(uv) * .5;
     color *= vignette;

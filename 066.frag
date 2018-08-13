@@ -11,12 +11,20 @@ uniform sampler2D backbuffer;
 
 void main( void ) {
 
-  vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+  vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy);
+       p /= min(resolution.x, resolution.y);
 
-  float circle = 1.0 - length(p) * .5;
-        circle = circle + cos(time * 2.);
+  float px = p.x + sin(time * .4);
+  float py = p.y + cos(time * .4);
 
-  vec3 dest = vec3(p + circle, 1.0);
+  float c1 = length(px * py);
+
+  float c2 = fract(px * py);
+
+  // float c2 = length(1.0) * .5;
+  //       c2 = c2 + sin(time * 2.);
+
+  vec3 dest = vec3(p + c1 + c2, 1.) * .7;
 
   gl_FragColor = vec4(dest, 1);
 
