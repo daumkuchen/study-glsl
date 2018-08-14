@@ -79,7 +79,9 @@ float sdFloor(vec3 p){
 float distanceFunc(vec3 p){
   // vec3 q = rotate(p, radians(time * 20.0), vec3(1.0, 1.0, 1.0));
   vec3 q = rotate(p, -1.0, vec3(1.0, 1.0, 1.0));
-  return smoothMin(sdSphere(vec3(q.x, q.y - 0.6, q.z)), sdFloor(vec3(q.x, q.y, q.z)), 5.5);
+  vec3 r = rotate(p, radians(time * 100.), vec3(1., 1., 1.));
+
+  return smoothMin(sdSphere(vec3(r.x, r.y - 0.6, r.z)), sdFloor(vec3(r.x, r.y, r.z)), 5.5);
 }
 
 // getNormal
