@@ -6,6 +6,10 @@ uniform vec2 iResolution;
 uniform vec2 iMouse;
 uniform float iTime;
 
+uniform sampler2D iChannel1;
+uniform sampler2D iChannel2;
+uniform sampler2D iChannel3;
+
 // Created by inigo quilez - 2015
 // License Creative Commons Attribution-NonCommercial-ShareAlike 3.0
 
