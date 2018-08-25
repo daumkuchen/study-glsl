@@ -17,13 +17,14 @@ vec2 rotate(vec2 v, float a) {
 void main(void){
 
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-  vec2 q = mod(uv, .2) - .1;
 
-  //
-  // 01
-  q += rotate(q, time * 2.);
+  vec2 q = mod(uv, .2) - .1;
+  		 // q += rotate(q, time * 2.);
 
   float f = 0.2 / abs(q.x) * abs(q.y);
-  gl_FragColor = vec4(vec3(f), 1.0);
+	float c = .4 - length(q);
+				// c += rotate(uv, time * 2.);
+
+  gl_FragColor = vec4(vec3(c), 1.0);
 
 }
