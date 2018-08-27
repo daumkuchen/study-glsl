@@ -20,9 +20,9 @@ vec3 normal(vec3 pos)
 {
   vec2 d = vec2(0.0, 1E-3);
   return normalize(vec3(
-      dist(pos + d.yxx) - dist(pos - d.yxx),
-      dist(pos + d.xyx) - dist(pos - d.xyx),
-      dist(pos + d.xxy) - dist(pos - d.xxy)
+    dist(pos + d.yxx) - dist(pos - d.yxx),
+    dist(pos + d.xyx) - dist(pos - d.xyx),
+    dist(pos + d.xxy) - dist(pos - d.xxy)
   ));
 }
 
@@ -89,11 +89,13 @@ void main(){
 
   mat3 rot = rotY(time);
 
-  vec3 pos = rot * vec3(0, 0, -5);
-  vec3 dir = rot * normalize(vec3(xy, 1.0));
+  vec3 pos = rot * vec3(0, 0, -5.);
+  vec3 dir = rot * normalize(vec3(xy, 1.));
 
   vec3 col = march(pos, dir);
 
-  gl_FragColor = vec4(col, 1.0);
+	// vec3 col2 = vec3(1. + sin(time), 0., 1. + sin(time));
+
+  gl_FragColor = vec4(col, 1.);
 
 }
