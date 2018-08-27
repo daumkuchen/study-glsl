@@ -365,7 +365,7 @@ mat3 setCamera( in vec3 ro, in vec3 ta, float cr )
     return mat3( cu, cv, cw );
 }
 
-void main(void){
+void main(){
   vec2 mo = iMouse.xy/iResolution.xy;
 	float time = 15.0 + iTime;
 

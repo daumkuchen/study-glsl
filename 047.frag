@@ -148,7 +148,7 @@ float easeInOutExpo(float t) {
   }
 }
 
-void main(void){
+void main(){
 
 	vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 

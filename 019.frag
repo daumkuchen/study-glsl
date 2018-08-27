@@ -21,7 +21,7 @@ mat2 rotate2d(float _angle){
 	return mat2(cos(_angle), -sin(_angle),  sin(_angle), cos(_angle));
 }
 
-void main(void){
+void main(){
 	vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 
 	uv *= rotate2d(time * 0.25);

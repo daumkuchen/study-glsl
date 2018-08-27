@@ -17,7 +17,7 @@ float rnd(vec3 p) {
   return mix(a.x, a.y, a.z);
 }
 
-void main(void){
+void main(){
 	vec2 p = (gl_FragCoord.xy / resolution.xy);
   gl_FragColor = vec4(vec3(rnd(p.xyy * 32.0) * 10.0), 1.0);
 }

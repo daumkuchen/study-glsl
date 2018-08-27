@@ -14,7 +14,7 @@ vec2 rotate(vec2 v, float a) {
 	return m * v;
 }
 
-void main(void){
+void main(){
 
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 

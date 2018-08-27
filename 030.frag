@@ -32,7 +32,7 @@ float lines(in vec2 pos, float b){
     return smoothstep(0.0, .5 + b * .5, abs((sin(pos.x*3.1415)+b*2.0))*.5);
 }
 
-void main(void){
+void main(){
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
        p *= 1.0;
   vec2 pos = p.xy * vec2(1.0, 1.0);

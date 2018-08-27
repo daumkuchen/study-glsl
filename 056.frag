@@ -24,7 +24,7 @@ float rings(vec2 p){
 
 }
 
-void main(void){
+void main(){
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
   vec3 dest = vec3(rings(p));

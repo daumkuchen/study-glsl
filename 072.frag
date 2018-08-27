@@ -9,7 +9,7 @@ uniform sampler2D backbuffer;
 
 const float num = 10.;
 
-void main(void){
+void main(){
 
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 

@@ -40,7 +40,7 @@ vec2 rot(vec2 p, float a) {
 	sin(a) * p.x + cos(a) * p.y);
 }
 
-void main(void){
+void main(){
 
   // fragment p
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);

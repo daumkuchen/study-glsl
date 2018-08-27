@@ -45,7 +45,7 @@ vec2 trans(vec2 p){
 
 }
 
-void main(void){
+void main(){
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution);
        p /= min(resolution.x, resolution.y);

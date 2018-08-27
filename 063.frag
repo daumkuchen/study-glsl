@@ -17,7 +17,7 @@ vec3 HSVtoRGB(vec3 hsv) {
 	return ((Hue(hsv.x)-1.0)*hsv.y+1.0) * hsv.z;
 }
 
-void main(void){
+void main(){
 
   float h = gl_FragCoord.x / resolution.x;
   float s = gl_FragCoord.y / resolution.y;
