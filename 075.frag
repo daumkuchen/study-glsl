@@ -18,7 +18,7 @@ float dist(vec3 pos)
 
 vec3 normal(vec3 pos)
 {
-  vec2 d = vec2(0.0, 1E-3);
+  vec2 d = vec2(0.0, 1E-2);
   return normalize(vec3(
     dist(pos + d.yxx) - dist(pos - d.yxx),
     dist(pos + d.xyx) - dist(pos - d.xyx),
