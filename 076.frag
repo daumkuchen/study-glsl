@@ -53,34 +53,13 @@ mat3 rotZ(float a)
 }
 
 //
-// ==================== OBJ
-
-float sdSphere(vec3 p, float s) {
-  return length(p) - s;
-}
-
-float sdTorus(vec3 p, vec2 t){
-  vec2 q = vec2(length(p.xy) - t.x, p.z);
-  return length(q)-t.y;
-}
-
-//
 // ==================== MESH
 
 float dist(vec3 pos)
 {
-
   pos = abs(pos);
   pos -= 1.0;
-
-  mat3 rotx = rotX(time * 3.);
-  mat3 roty = rotY(time * 2.);
-
-  vec3 p = rotx * roty * pos;
-
-  // return length(pos) - 0.5;
-  // return sdSphere(pos, .5);
-  return sdTorus(p, vec2(.6, .3));
+  return length(pos) - 0.5;
 }
 
 vec3 normal(vec3 pos)
