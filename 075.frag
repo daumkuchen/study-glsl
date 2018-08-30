@@ -78,14 +78,13 @@ float dist(vec3 pos)
 
   vec3 p = rotx * roty * pos;
 
-  // return length(pos) - 0.5;
   // return sdSphere(pos, .5);
   return sdTorus(p, vec2(.6, .3));
 }
 
 vec3 normal(vec3 pos)
 {
-  vec2 d = vec2(0.0, 1E-2);
+  vec2 d = vec2(0., 1E-2);
   return normalize(vec3(
     dist(pos + d.yxx) - dist(pos - d.yxx),
     dist(pos + d.xyx) - dist(pos - d.xyx),
@@ -98,16 +97,21 @@ vec3 march(vec3 pos, vec3 dir)
   for (int i = 0; i < 32; ++i)
   {
     float d = dist(pos);
-    if (d < 0.001)
+    if (d < .001)
     {
-      float c = float(i) / 32.0;
-      vec3 normal = normal(pos);
-      float d = dot(-normal, normalize(vec3(1.0)));
-      return vec3(d * c);
+
+      float c = float(i) / 32.;
+      vec3 n = normal(pos);
+      float d = dot(-n, normalize(vec3(1.)));
+
+      return vec3(n);
+
     }
     pos += d * dir;
   }
-  return vec3(1.0, 1.0, 1.0);
+
+  // background
+  return vec3(1., 1., 1.);
 }
 
 //
@@ -115,16 +119,20 @@ vec3 march(vec3 pos, vec3 dir)
 
 void main(){
 
-  vec2 xy = (gl_FragCoord.xy - resolution.xy / 2.0) / resolution.y;
+  // vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / resolution.x;
+  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 
   mat3 rot = rotY(time);
 
-  vec3 pos = rot * vec3(0, 0, -5.);
-  vec3 dir = rot * normalize(vec3(xy, 1.));
+  vec3 pos = rot * vec3(0, 0, -3.5);
+
+  // normalize
+  // vec3 dir = rot * normalize(vec3(uv, 1.));
+
+  // abs
+  vec3 dir = rot * abs(vec3(uv, 1.));
 
   vec3 col = march(pos, dir);
-
-	// vec3 col2 = vec3(1. + sin(time), 0., 1. + sin(time));
 
   gl_FragColor = vec4(col, 1.);
 

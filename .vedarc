@@ -1,22 +1,12 @@
 {
   "audio": true,
   "camera": true,
-
   IMPORTED: {
-    // "image1": {
-    //   "PATH": "./image1.png",
-    // },
-    "iChannel1": {
-      "PATH": "",
+    "cat1": {
+      "PATH": "images/cat_01.jpg",
     },
-    "iChannel2": {
-      "PATH": "",
-    },
-    "iChannel3": {
-      "PATH": "",
+    "cat2": {
+      "PATH": "images/cat_02.jpg",
     }
-
-
-
   },
 }

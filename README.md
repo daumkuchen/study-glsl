@@ -76,4 +76,4 @@
 * 073 balls
 * 074 mod
 * 075 raymarching(function)
-* 076 raymarching(function)
+* 076 texture
