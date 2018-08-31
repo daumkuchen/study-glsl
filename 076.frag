@@ -65,6 +65,12 @@ void main(){
   float mono = t.r + t.g + t.b - 1.;
   vec3 texMono = vec3(mono);
 
-  gl_FragColor = vec4(texMono, 1.);
+  // col
+  float texr = t.r;
+  float texg = t.g + (uv.x * 2.);
+  float texb = t.b - (uv.x * 2.);
+  vec3 texCol = vec3(texr, texg, texb);
+
+  gl_FragColor = vec4(texCol, 1.);
 
 }
