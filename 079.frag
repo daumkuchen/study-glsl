@@ -38,8 +38,8 @@ struct Intersection
   vec3 rayDir;
 };
 
-const vec3 LDR = vec3(0.577);
-const float EPS = 0.0001;
+const vec3 LDR = vec3(.577);
+const float EPS = .001;
 const int MAX_REF = 4;
 
 Sphere sphere[3];
@@ -48,11 +48,11 @@ Plane plane;
 void intersectInit(inout Intersection I)
 {
   I.hit      = 0;
-  I.hitPoint = vec3(0.0);
-  I.normal   = vec3(0.0);
-  I.color    = vec3(0.0);
-  I.distance = 1.0e+30;
-  I.rayDir   = vec3(0.0);
+  I.hitPoint = vec3(0.);
+  I.normal   = vec3(0.);
+  I.color    = vec3(0.);
+  I.distance = 1.e+30;
+  I.rayDir   = vec3(0.);
 }
 
 void intersectSphere(Ray R, Sphere S, inout Intersection I)
@@ -62,10 +62,10 @@ void intersectSphere(Ray R, Sphere S, inout Intersection I)
   float c = dot(a, a) - (S.radius * S.radius);
   float d = b * b - c;
   float t = -b - sqrt(d);
-  if(d > 0.0 && t > EPS && t < I.distance){
+  if(d > 0. && t > EPS && t < I.distance){
     I.hitPoint = R.origin + R.direction * t;
     I.normal = normalize(I.hitPoint - S.position);
-    d = clamp(dot(LDR, I.normal), 0.1, 1.0);
+    d = clamp(dot(LDR, I.normal), .1, 1.);
     I.color = S.color * d;
     I.distance = t;
     I.hit++;
@@ -81,13 +81,13 @@ void intersectPlane(Ray R, Plane P, inout Intersection I)
   if(t > EPS && t < I.distance){
     I.hitPoint = R.origin + R.direction * t;
     I.normal = P.normal;
-    float d = clamp(dot(LDR, I.normal), 0.1, 1.0);
-    float m = mod(I.hitPoint.x, 2.0);
-    float n = mod(I.hitPoint.z, 2.0);
-    if((m > 1.0 && n > 1.0) || (m < 1.0 && n < 1.0)){
-      d *= 0.5;
+    float d = clamp(dot(LDR, I.normal), .1, 1.);
+    float m = mod(I.hitPoint.x, 2.);
+    float n = mod(I.hitPoint.z, 2.);
+    if((m > 1. && n > 1.) || (m < 1. && n < 1.)){
+      d *= .5;
     }
-    float f = 1.0 - min(abs(I.hitPoint.z), 25.0) * 0.04;
+    float f = 1. - min(abs(I.hitPoint.z), 25.) * .4;
     I.color = P.color * d * f;
     I.distance = t;
     I.hit++;
@@ -106,28 +106,28 @@ void intersectExec(Ray R, inout Intersection I)
 void main(){
 
   // fragment position
-  vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 p = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
   // ray init
   Ray ray;
-  ray.origin = vec3(0.0, 2.0, 6.0);
-  ray.direction = normalize(vec3(p.x, p.y, -1.0));
+  ray.origin = vec3(0., 2., 6.);
+  ray.direction = normalize(vec3(p.x, p.y, -1.));
 
   // sphere init
-  sphere[0].radius = 0.5;
-  sphere[0].position = vec3(0.0, -0.5, sin(time));
-  sphere[0].color = vec3(1.0, 0.0, 0.0);
-  sphere[1].radius = 1.0;
-  sphere[1].position = vec3(2.0, 0.0, cos(time * 0.666));
-  sphere[1].color = vec3(0.0, 1.0, 0.0);
+  sphere[0].radius = .5;
+  sphere[0].position = vec3(0., -.5, sin(time));
+  sphere[0].color = vec3(1., 0., 0.);
+  sphere[1].radius = 1.;
+  sphere[1].position = vec3(2., 0., cos(time * .666));
+  sphere[1].color = vec3(0., 1., 0.);
   sphere[2].radius = 1.5;
-  sphere[2].position = vec3(-2.0, 0.5, cos(time * 0.333));
-  sphere[2].color = vec3(0.0, 0.0, 1.0);
+  sphere[2].position = vec3(-2., .5, cos(time * .333));
+  sphere[2].color = vec3(0., 0., 1.);
 
   // plane init
-  plane.position = vec3(0.0, -1.0, 0.0);
-  plane.normal = vec3(0.0, 1.0, 0.0);
-  plane.color = vec3(1.0);
+  plane.position = vec3(0., -1., 0.);
+  plane.normal = vec3(0., 1., 0.);
+  plane.color = vec3(1.);
 
   // intersection init
   Intersection its;
@@ -135,7 +135,7 @@ void main(){
 
   // hit check
   vec3 destColor = vec3(ray.direction.y);
-  vec3 tempColor = vec3(1.0);
+  vec3 tempColor = vec3(1.);
   Ray q;
   intersectExec(ray, its);
   if(its.hit > 0){
@@ -152,6 +152,6 @@ void main(){
     }
   }
 
-  gl_FragColor = vec4(destColor, 1.0);
+  gl_FragColor = vec4(destColor, 1.);
 
 }
