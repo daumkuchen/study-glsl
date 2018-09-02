@@ -34,3 +34,43 @@ vec3 rotate(vec3 p, float angle, vec3 axis){
     );
     return m * p;
 }
+
+mat2 rot2d(float a)
+{
+  float s = sin(a);
+  float c = cos(a);
+  return mat2(c, s, -s, c);
+}
+
+mat3 rotX(float a)
+{
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    1, 0, 0,
+    0, c, -s,
+    0, s, c
+  );
+}
+
+mat3 rotY(float a)
+{
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    c, 0, -s,
+    0, 1, 0,
+    s, 0, c
+  );
+}
+
+mat3 rotZ(float a)
+{
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    c, -s, 0,
+    s, c, 0,
+    0,0, 1
+  );
+}

@@ -71,7 +71,7 @@ float dist(vec3 pos)
 {
 
   pos = abs(pos);
-  pos -= 1.0;
+  pos -= 1.;
 
   mat3 rotx = rotX(time * 3.);
   mat3 roty = rotY(time * 2.);
@@ -100,18 +100,25 @@ vec3 march(vec3 pos, vec3 dir)
     if (d < .001)
     {
 
-      float c = float(i) / 32.;
-      vec3 n = normal(pos);
-      float d = dot(-n, normalize(vec3(1.)));
+      float ii = float(i);
 
-      return vec3(n);
+      float c = ii / 32.;
+      vec3 n = normal(pos);
+
+      // float d = dot(-n, normalize(vec3(1.)));
+      float d = dot(n, normalize(vec3(1.)));
+            d = 1. / d;
+
+      return vec3(d);
 
     }
     pos += d * dir;
   }
 
   // background
-  return vec3(1., 1., 1.);
+  // return vec3(1., 1., 1.);
+  return vec3(.5, .5, .5);
+
 }
 
 //
@@ -124,10 +131,14 @@ void main(){
 
   mat3 rot = rotY(time);
 
-  vec3 pos = rot * vec3(0, 0, -3.5);
+  // vec3 pos = rot * vec3(0, 0, -3.5);
+  vec3 pos = vec3(0, 0, -3.5);
+
+  //
+  vec3 dir = normalize(vec3(uv, 1.));
 
   // normalize
-  vec3 dir = rot * normalize(vec3(uv, 1.));
+  // vec3 dir = rot * normalize(vec3(uv, 1.));
 
   // abs
   // vec3 dir = rot * abs(vec3(uv, 1.));
