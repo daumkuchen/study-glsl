@@ -70,8 +70,12 @@ float sdTorus(vec3 p, vec2 t){
 float dist(vec3 pos)
 {
 
-  pos = abs(pos);
-  pos -= 1.;
+  // abs
+  // pos = abs(pos);
+  // pos -= 1.;
+
+  pos = fract(pos);
+  pos += -1.;
 
   mat3 rotx = rotX(time * 3.);
   mat3 roty = rotY(time * 2.);
@@ -80,6 +84,7 @@ float dist(vec3 pos)
 
   // return sdSphere(pos, .5);
   return sdTorus(p, vec2(.6, .3));
+
 }
 
 vec3 normal(vec3 pos)
