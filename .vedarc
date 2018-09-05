@@ -7,6 +7,9 @@
     },
     "cat2": {
       "PATH": "images/cat_02.jpg",
+    },
+    "bqmn": {
+      "PATH": "images/bqmn.jpg",
     }
   },
 }

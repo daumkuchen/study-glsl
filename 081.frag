@@ -6,6 +6,7 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
+uniform sampler2D bqmn;
 
 const float PI = 3.1415926;
 
@@ -74,8 +75,13 @@ float dist(vec3 pos)
   // pos = abs(pos);
   // pos -= 1.;
 
-  pos = fract(pos);
-  pos += -1.;
+  // fract
+  // pos = fract(pos);
+  // pos += -1.;
+
+  // mod
+  float modpow = 2.;
+  pos = mod(pos, modpow * 2.) - modpow;
 
   mat3 rotx = rotX(time * 3.);
   mat3 roty = rotY(time * 2.);
@@ -133,6 +139,11 @@ void main(){
 
   // vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / resolution.x;
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+  vec2 tUv = gl_FragCoord.xy / resolution;
+
+// tex
+  vec4 t = texture2D(bqmn, tUv);
+  vec3 tex = vec3(t.r, t.g, t.b);
 
   mat3 rot = rotY(time);
 
@@ -149,6 +160,7 @@ void main(){
   // vec3 dir = rot * abs(vec3(uv, 1.));
 
   vec3 col = march(pos, dir);
+  // vec3 col = march(pos, dir * (1. - tex));
 
   gl_FragColor = vec4(col, 1.);
 
