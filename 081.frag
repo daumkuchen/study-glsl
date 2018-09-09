@@ -145,13 +145,14 @@ void main(){
   vec4 t = texture2D(bqmn, tUv);
   vec3 tex = vec3(t.r, t.g, t.b);
 
-  mat3 rot = rotY(time);
+  mat3 rotx = rotX(time * .3);
+  mat3 roty = rotY(time * .2);
 
   // vec3 pos = rot * vec3(0, 0, -3.5);
   vec3 pos = vec3(0, 0, -3.5);
 
   //
-  vec3 dir = normalize(vec3(uv, 1.));
+  vec3 dir = rotx * roty  * normalize(vec3(uv, 1.));
 
   // normalize
   // vec3 dir = rot * normalize(vec3(uv, 1.));
