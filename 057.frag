@@ -29,7 +29,7 @@ void main(){
   if(distance(p, pos) < 0.2){
     gl_FragColor = vec4(0.1 / length(pos * uv));
   } else {
-    gl_FragColor = texture2D(backbuffer, uv) * 0.8;
+    gl_FragColor = texture2D(backbuffer, uv) * .9;
   }
 
 }
