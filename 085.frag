@@ -8,16 +8,16 @@ uniform float time;
 uniform sampler2D backbuffer;
 
 vec2 circle(vec2 p) {
-  return vec2(length(p), .2);
+  return vec2(length(p), .5);
 }
 
 vec2 spuare(vec2 p) {
-  return vec2(abs(p.x) + abs(p.y), .4);
+  return vec2(abs(p.x) + abs(p.y), .5);
 }
 
 vec2 hex(vec2 p, float s) {
   vec2 q = abs(p);
-  return vec2(max(q.x * .57735 + q.y - 1. * s, q.x - .866 * s), .6);
+  return vec2(max(q.x * .57735 + q.y - 1. * s, q.x - .866 * s), .5);
   // p.x *= 0.57735*2.0;
 	// p.y += mod(floor(p.x), 2.0)*0.5;
 	// p = abs((mod(p, 1.0) - 0.5));
