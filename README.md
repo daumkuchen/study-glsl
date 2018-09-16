@@ -84,3 +84,8 @@
 * 081 raymarching
 * 082 floating noise
 * 083 mophong sphere(forked)
+* 084 raymarching
+* 085 morphing
+* 086 exp
+* 087 motion blur
+* 088 motion blur(forked)
