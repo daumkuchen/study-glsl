@@ -17,6 +17,7 @@ vec2 iSphere( in vec3 ro, in vec3 rd, in vec4 sp, in vec3 ve, out vec3 nor )
 {
   float t = -1.0;
 	float s = 0.0;
+
 	nor = vec3(0.0);
 
 	vec3  rc = ro - sp.xyz;
@@ -26,7 +27,8 @@ vec2 iSphere( in vec3 ro, in vec3 rd, in vec4 sp, in vec3 ve, out vec3 nor )
 	float D = dot(rc,ve);
 	float E = dot(rd,ve);
 	float aab = A*A - B;
-	float eec = E*E - C;
+	float eec
+  = E*E - C;
 	float aed = A*E - D;
 	float k = aed*aed - eec*aab;
 
