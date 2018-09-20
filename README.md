@@ -89,3 +89,4 @@
 * 086 exp
 * 087 motion blur
 * 088 motion blur(forked)
+* 089 paletts(iq)
