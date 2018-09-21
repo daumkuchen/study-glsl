@@ -7,9 +7,9 @@ uniform vec2 mouse;
 uniform vec2 resolution;
 uniform sampler2D backbuffer;
 
-vec3 pal( in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d )
+vec3 pal(in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d)
 {
-  return a + b*cos( 6.28318*(c*t+d) );
+  return a + b*cos(6.28318*(c*t+d));
 }
 
 void main()
