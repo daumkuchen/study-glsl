@@ -83,7 +83,7 @@ void main()
 
 	// camera
 	vec3  ro = vec3(0.0,0.0,4.0);
-    vec3  rd = normalize( vec3(p.xy,-2.0) );
+  vec3  rd = normalize( vec3(p.xy,-2.0) );
 
     // sphere
 
