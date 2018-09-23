@@ -1,7 +1,7 @@
 /*{ "audio": true }*/
 
 #ifdef GL_ES
-precision highp float;
+precision mediump float;
 #endif
 
 uniform vec2 resolution;

@@ -1,46 +1,57 @@
 #ifdef GL_ES
-precision highp float;
+precision mediump float;
 #endif
 
-uniform float time;
-uniform vec2 mouse;
 uniform vec2 resolution;
+uniform vec2 mouse;
+uniform float time;
 uniform sampler2D backbuffer;
 
-vec3 pal(in float t, in vec3 a, in vec3 b, in vec3 c, in vec3 d)
+vec3 diskWithMotionBlur( vec3 col, in vec2 uv, in vec3 sph, in vec2 cd, in vec3 sphcol )
 {
-  return a + b*cos(6.28318*(c*t+d));
+	vec2 xc = uv - sph.xy;
+	float a = dot(cd,cd);
+	float b = dot(cd,xc);
+	float c = dot(xc,xc) - sph.z*sph.z;
+	float h = b*b - a*c;
+	if( h>0.0 )
+	{
+		h = sqrt( h );
+
+		float ta = max( 0.0, (-b - h)/a );
+		float tb = min( 1.0, (-b + h)/a );
+
+		if( ta < tb ) // we can comment this conditional, in fact
+		    col = mix( col, sphcol, clamp(2.0*(tb-ta),0.0,1.0) );
+	}
+	return col;
 }
+
+vec3 hash3( float n ) { return fract(sin(vec3(n,n+1.0,n+2.0))*43758.5453123); }
+vec4 hash4( float n ) { return fract(sin(vec4(n,n+1.0,n+2.0,n+3.0))*43758.5453123); }
+
+const float speed = 8.0;
+vec2 getPosition( float time, vec4 id ) { return vec2(       0.9*sin((speed*(0.75+0.5*id.z))*time+20.0*id.x),        0.75*cos(speed*(0.75+0.5*id.w)*time+20.0*id.y) ); }
+vec2 getVelocity( float time, vec4 id ) { return vec2( speed*0.9*cos((speed*(0.75+0.5*id.z))*time+20.0*id.x), -speed*0.75*sin(speed*(0.75+0.5*id.w)*time+20.0*id.y) ); }
 
 void main()
 {
 
-  vec2 uv = gl_FragCoord.xy / resolution.xy;
+	vec2 p = (2.0*gl_FragCoord.xy-resolution.xy) / resolution.y;
 
-  // animate
-  // uv.x += time * .1;
+	vec3 col = vec3(0.2) + 0.05*p.y;
 
-  // compute colors
-  vec3               col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(1., 1., 1.), vec3(.0, .33, .67));
-  if(uv.y>(1. / 7.)) col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(1., 1., 1.), vec3(.0, .10, .20));
-  if(uv.y>(2. / 7.)) col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(1., 1., 1.), vec3(.3, .20, .20));
-  if(uv.y>(3. / 7.)) col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(1., 1., 0.), vec3(.8, .90, .30));
-  if(uv.y>(4. / 7.)) col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(1., 0., 0.), vec3(.0, .15, .20));
-  if(uv.y>(5. / 7.)) col = pal(uv.x, vec3(.5, .5, .5), vec3(.5, .5, .5), vec3(2., 1., 0.), vec3(.5, .20, .25));
-  if(uv.y>(6. / 7.)) col = pal(uv.x, vec3(.8, .5, .4), vec3(.2, .4, .2), vec3(2., 1., 1.), vec3(.0, .25, .25));
+	for( int i=0; i<16; i++ )
+	{
+		vec4 off = hash4( float(i)*13.13 );
+    vec3 sph = vec3( getPosition( time, off ), 0.02+0.1*off.x );
+    vec2 cd = getVelocity( time, off ) /24.0 ;
+		vec3 sphcol = 0.7 + 0.3*sin( 3.0*off.z + vec3(4.0,0.0,2.0) );
+    col = diskWithMotionBlur( col, p, sph, cd, sphcol );
+	}
 
-  // band
-  float f = fract(uv.y * 7.);
+    col += (1.0/255.0)*hash3(p.x+13.0*p.y);
 
-  // borders
-  col *= smoothstep(.49, .47, abs(f - .5));
-
-  // shadowing
-  col *= .5 + .5 * sqrt(4. * f * (1. - f));
-
-  // dithering
-  // col += (1. / 255.) * texture(iChannel0, fragCoord.xy / iChannelResolution[0].xy).xyz;
-
-	gl_FragColor = vec4(col * .5, 1.);
+	gl_FragColor = vec4(col,1.0);
 
 }

@@ -88,5 +88,7 @@
 * 085 morphing
 * 086 exp
 * 087 motion blur
-* 088 motion blur(forked)
-* 089 paletts(iq)
+* 088 motion blur(iq)
+* 089 motion blur(iq)
+* 090 paletts(iq)
+* 091 floating sphere(iq)
