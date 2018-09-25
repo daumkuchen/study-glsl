@@ -79,14 +79,14 @@ void main(){
   // gl_FragColor = vec4(vec3(color), 1.);
 
   // 04 morphing & anti-aliasing
-  // vec2 d = morphing(uv);
-  // vec3 color = mix(vec3(1.), vec3(0.), smoothstep(.49, .5, d.x));
-  // gl_FragColor = vec4(vec3(color), 1.);
+  vec2 d = morphing(uv);
+  vec3 color = mix(vec3(1.), vec3(0.), smoothstep(.49, .5, d.x));
+  gl_FragColor = vec4(vec3(color), 1.);
 
   // 05 anti-aliasing
-  vec2 d = circle(uv);
-  vec3 color = vec3(1. - smoothstep(.49, .5, d.x));
-  gl_FragColor = vec4(vec3(color), 1.);
+  // vec2 d = circle(uv);
+  // vec3 color = vec3(1. - smoothstep(.49, .5, d.x));
+  // gl_FragColor = vec4(vec3(color), 1.);
 
   // vec4 color = vec4(0.);
   // const int iter = 4;
