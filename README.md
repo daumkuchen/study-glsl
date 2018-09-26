@@ -92,3 +92,5 @@
 * 089 motion blur(iq)
 * 090 paletts(iq)
 * 091 floating sphere(iq)
+* 092 morphing
+* 093 noise
