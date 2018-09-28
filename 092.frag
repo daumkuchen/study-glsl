@@ -26,9 +26,9 @@ float morphing(vec2 p)
 
   float a = smoothstep(.2, .8, mod(t, 1.));
 
-  if(pair == 0) return mix(lPolygon(p, 4), lPolygon(p, 5), a);
-  if(pair == 1) return mix(lPolygon(p, 5), lPolygon(p, 6), a);
-           else return mix(lPolygon(p, 6), lPolygon(p, 4), a);
+  if(pair == 0) return mix(lPolygon(p, 4), lPolygon(p, 6), a);
+  if(pair == 1) return mix(lPolygon(p, 6), lPolygon(p, 8), a);
+           else return mix(lPolygon(p, 8), lPolygon(p, 4), a);
 
 }
 
