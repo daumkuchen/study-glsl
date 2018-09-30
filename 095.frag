@@ -7,7 +7,7 @@ uniform vec2 mouse;
 uniform vec2 resolution;
 uniform sampler2D backbuffer;
 
-const int count = 7;
+const int count = 32;
 
 float sdSphere(vec2 p)
 {
@@ -23,7 +23,9 @@ void main()
   for(int i = 0; i < count; i++)
   {
     float fi = float(i);
-    c += smoothstep(1., .99, sdSphere(vec2(uv.x + 1.5 - fi * .5, uv.y + cos(time * 2. + fi) * .5)) * 10.);
+    float x = uv.x + 1.5 - fi * .1;
+    float y = uv.y + cos(time * 2. + fi) * .25;
+    c += smoothstep(1., .99, sdSphere(vec2(x, y)) * 30.);
   }
   vec3 color = vec3(c);
 
