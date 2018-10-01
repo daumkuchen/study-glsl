@@ -94,3 +94,6 @@
 * 091 floating sphere(iq)
 * 092 morphing
 * 093 noise
+* 094 bubble
+* 095 circle
+* 096 circle
