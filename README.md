@@ -74,7 +74,7 @@
 * 071 random(forked)
 * 072 motion blur
 * 073 balls
-* 074 mod
+* 074 pattern
 * 075 raymarching
 * 076 texture
 * 077 texture
@@ -98,3 +98,5 @@
 * 095 circle
 * 096 circle
 * 097 morphing sphere(forked)
+* 098 pattern
+* 099 pattern

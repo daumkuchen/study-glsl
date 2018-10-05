@@ -21,9 +21,9 @@ void main(){
   vec2 q = mod(uv, .2) - .1;
   		 // q += rotate(q, time * 2.);
 
-  float f = .2 / abs(q.x) * abs(q.y);
-	float c = 1. - length(q) * 2.;
-				c += sin(time);
+  // float f = .2 / abs(q.x) * abs(q.y);
+	float c = 1. - length(q) * 10.;
+				// c += sin(time);
 
   gl_FragColor = vec4(vec3(c), 1.0);
 
