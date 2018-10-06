@@ -88,10 +88,10 @@
 * 085 morphing
 * 086 exp
 * 087 motion blur
-* 088 motion blur(iq)
-* 089 motion blur(iq)
-* 090 paletts(iq)
-* 091 floating sphere(iq)
+* 088 motion blur(forked)
+* 089 motion blur(forked)
+* 090 paletts(forked)
+* 091 floating sphere(forked)
 * 092 morphing
 * 093 noise
 * 094 bubble
@@ -100,3 +100,4 @@
 * 097 morphing sphere(forked)
 * 098 pattern
 * 099 pattern
+* 100 Space Puppy Zebra(forked)

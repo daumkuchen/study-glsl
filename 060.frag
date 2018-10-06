@@ -114,7 +114,8 @@ mat2 rotate2d(float _angle){
   return mat2(cos(_angle),sin(_angle),-sin(_angle),cos(_angle));
 }
 
-void main() {
+void main()
+{
   vec2 uv = (gl_FragCoord.xy - 0.5 * resolution.xy) / resolution.y;
        uv *= 5.0;
 

@@ -28,7 +28,8 @@ vec4 ball(float i, float j) {
 	return color * intensity;
 }
 
-void main() {
+void main()
+{
 
 	vec4 color = vec4(0.0);
 	for (float i = 0.; i < num; ++i) {

@@ -38,7 +38,8 @@ vec3 normal(vec3 p) {
 	return normalize(n);
 }
 
-void main() {
+void main()
+{
 
 	vec3 kS = vec3(.7, .5, .9);
 	float T = time;
