@@ -204,16 +204,27 @@ mat3 setCamera(in vec3 ro, in vec3 ta, float cr)
   return mat3(cu, cv, cw);
 }
 
+mat3 rotZ(float a)
+{
+  float s = sin(a);
+  float c = cos(a);
+  return mat3(
+    c, -s, 0,
+    s, c, 0,
+    0,0, 1
+  );
+}
+
 void main()
 {
+
 	vec2 uv = gl_FragCoord.xy / resolution.xy;
   vec2 q = uv;
   vec2 p = -1. + 2. * q;
 	p.x *= resolution.x / resolution.y;
 
 	// camera
-	vec3 ro = vec3(0., 0., -3.5);
-	// camera-to-world transformation
+	vec3 ro = vec3(0., 0., -5.);
 
   // ray direction
 	vec3 rd = normalize(vec3(p.xy, 2.));
@@ -222,4 +233,5 @@ void main()
   vec3 col = render(ro, rd);
 	col = pow( col, vec3(.4545));
   gl_FragColor = vec4(col, 1.);
+
 }

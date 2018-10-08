@@ -98,7 +98,8 @@ vec3 getNormal(vec3 p){
   ));
 }
 
-void main(){
+void main()
+{
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
   vec3 ray = normalize(vec3(sin(fov) * p.x, sin(fov) * p.y, -cos(fov)));
   float distance = 0.0;

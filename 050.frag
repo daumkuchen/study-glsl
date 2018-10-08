@@ -21,7 +21,8 @@ float randomSerie(float x, float freq, float t) {
   return step(.8,random(floor(x*freq)-floor(t)));
 }
 
-void main(){
+void main()
+{
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 

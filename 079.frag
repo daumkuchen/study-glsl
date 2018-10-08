@@ -103,7 +103,8 @@ void intersectExec(Ray R, inout Intersection I)
   intersectPlane(R, plane, I);
 }
 
-void main(){
+void main()
+{
 
   // fragment position
   vec2 p = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);

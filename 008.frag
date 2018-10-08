@@ -22,7 +22,8 @@ vec2 truchetPattern(in vec2 _st, in float _index){
   return _st;
 }
 
-void main(){
+void main()
+{
 
   vec2 st = gl_FragCoord.xy/resolution.xy;
        st *= 10.0;

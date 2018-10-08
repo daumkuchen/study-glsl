@@ -79,7 +79,8 @@ float cnoise(vec3 P){
   return 2.2 * n_xyz;
 }
 
-void main(){
+void main()
+{
 	vec2 p = (gl_FragCoord.xy / resolution.xy);
   gl_FragColor = vec4(vec3(cnoise(p.xyy * 32.0) * 10.0), 1.0);
 }

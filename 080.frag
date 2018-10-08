@@ -180,7 +180,8 @@ vec3 getNormal(vec3 p) {
 //
 // ==================== MAIN
 
-void main(){
+void main()
+{
 
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 

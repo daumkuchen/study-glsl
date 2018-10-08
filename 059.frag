@@ -11,7 +11,8 @@ float rings(vec2 p){
   return sin(length(c * 2.0) * 16.0);
 }
 
-void main(){
+void main()
+{
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution);
        p /= min(resolution.x, resolution.y);

@@ -122,7 +122,8 @@ vec3 hsv(float h, float s, float v)
   return v * mix(vec3(t.x), clamp(p - vec3(t.x), 0.0, 1.0), s);
 }
 
-void main(){
+void main()
+{
 
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 

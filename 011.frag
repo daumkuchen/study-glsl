@@ -6,7 +6,8 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
 
-void main(){
+void main()
+{
 
   vec2 mouse = vec2(mouse.x * 2.0 - 1.0, mouse.y * 2.0 - 1.0);
   

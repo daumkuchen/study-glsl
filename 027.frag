@@ -7,7 +7,8 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-void main(){
+void main()
+{
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 
   vec3 color = vec3(0.0, 0.0, 0.0);

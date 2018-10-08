@@ -124,7 +124,8 @@ vec2 o4 = o3.yw * d.x + o3.xz * (1.0 - d.x);
 return o4.y * d.y + o4.x * (1.0 - d.y);
 }
 
-void main(){
+void main()
+{
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
   p *= 0.5;
   vec2 pos = vec2(p) * 2.0;

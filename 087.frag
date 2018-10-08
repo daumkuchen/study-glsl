@@ -144,7 +144,8 @@ vec4 render(vec2 p, float t)
 //
 // ==================== MAIN
 
-void main(){
+void main()
+{
 
   // vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / resolution.x;
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);

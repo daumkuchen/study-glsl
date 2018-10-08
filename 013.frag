@@ -10,7 +10,8 @@ uniform float time;
 
 #define N .45
 
-void main(){
+void main()
+{
 
   // vec2 v = (gl_FragCoord.xy - resolution / 2.0) / min(resolution.y,resolution.x) * 20.0;
   vec2 v = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);

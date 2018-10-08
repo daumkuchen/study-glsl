@@ -9,7 +9,8 @@ uniform sampler2D backbuffer;
 
 uniform sampler2D cat1;
 
-void main(){
+void main()
+{
 
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   vec2 tUv = gl_FragCoord.xy / resolution;
