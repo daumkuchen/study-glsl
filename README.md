@@ -101,3 +101,5 @@
 * 098 pattern
 * 099 pattern
 * 100 Space Puppy Zebra(forked)
+* 101 Fractal Brownian
+* 102 Fractal Brownian
