@@ -7,6 +7,8 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
+// https://thebookofshaders.com/13/?lan=jp
+
 float random (in vec2 _uv) {
     return fract(sin(dot(_uv.xy,vec2(12.9898,78.233)))*43758.5453123);
 }
