@@ -62,15 +62,54 @@ float sdTorus(vec3 p, vec2 t){
   return length(q)-t.y;
 }
 
+float random (in vec2 _uv) {
+    return fract(sin(dot(_uv.xy,vec2(12.9898,78.233)))*43758.5453123);
+}
+
+float noise (in vec2 _uv)
+{
+    vec2 i = floor(_uv);
+    vec2 f = fract(_uv);
+
+    // Four corners in 2D of a tile
+    float a = random(i);
+    float b = random(i + vec2(1.0, 0.0));
+    float c = random(i + vec2(0.0, 1.0));
+    float d = random(i + vec2(1.0, 1.0));
+
+    vec2 u = f * f * (3.0 - 2.0 * f);
+
+    return mix(a, b, u.x) +
+            (c - a)* u.y * (1.0 - u.x) +
+            (d - b) * u.x * u.y;
+}
+
+#define NUM_OCTAVES 5
+float fbm ( in vec2 _uv)
+{
+    float v = 0.0;
+    float a = 0.5;
+    vec2 shift = vec2(100.0);
+    // Rotate to reduce axial bias
+    mat2 rot = mat2(cos(0.5), sin(0.5),
+                    -sin(0.5), cos(0.50));
+    for (int i = 0; i < NUM_OCTAVES; ++i) {
+        v += a * noise(_uv);
+        _uv = rot * _uv * 2.0 + shift;
+        a *= 0.5;
+    }
+    return v;
+}
+
 float distanceFunc(vec3 p) {
 
   vec3 rotate1 = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
   vec3 twist1 = twist(rotate1, sin(time * 2.) * 1.);
 
-  float s1 = sdSphere(vec3(twist1.x + .5 + sin(time), twist1.y + .5 + cos(time), twist1.z + 1. + sin(time)), 1.) * .8;
-  float s2 = sdSphere(vec3(twist1.x - .5 - sin(time), twist1.y - .5 - cos(time), twist1.z - 1. - cos(time)), 1.) * .8;
+  float s1 = sdSphere(p, 2.);
+  // float f1 = fbm(p.xy);
 
-  return smoothMin(s1, s2, 2.);
+  return smoothMin(s1, s1 + cos(time), 1.);
 
 }
 
