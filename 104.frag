@@ -12,7 +12,7 @@ const float angle = 60.;
 const float fov = angle * .5 / PI / 180.;
 
 const vec3 lightDir = normalize(vec3(-.5, .5, .5));
-const vec3 ambient = vec3(.05, .05, .05);
+const vec3 ambient = vec3(.1, .1, .1);
 
 vec3 rotate(vec3 p, float angle, vec3 axis){
   vec3 a = normalize(axis);
@@ -103,13 +103,13 @@ float fbm ( in vec2 _uv)
 
 float distanceFunc(vec3 p) {
 
-  vec3 rotate1 = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
-  vec3 twist1 = twist(rotate1, sin(time * 2.) * 1.);
+  vec3 r = rotate(p, radians(time * 100.), vec3(1., 1., 1.));
+  vec3 t = twist(r, sin(time * 2.));
 
-  float s1 = sdSphere(p, 2.);
-  // float f1 = fbm(p.xy);
+  float s1 = sdSphere(t, 1.);
+  float s2 = sdTorus(t, vec2(.5));
 
-  return smoothMin(s1, s1 + cos(time), 1.);
+  return smoothMin(s2, s2 * .5, 1.);
 
 }
 
