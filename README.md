@@ -105,4 +105,6 @@
 * 102 Fractal Brownian
 * 103 raymarching
 * 104 raymarching
-* 105 Fractal Brownian
+* 105 Fractal Brownian wall
+* 106 gradient noise wall
+* 107 value noise wall
