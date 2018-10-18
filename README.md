@@ -108,3 +108,4 @@
 * 105 Fractal Brownian wall
 * 106 gradient noise wall
 * 107 value noise wall
+* 108 glitch
