@@ -41,7 +41,7 @@ float fbm (in vec2 p)
 void main()
 {
 
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   float n = fbm(vec2(length(uv * 10.) + time * .1));
   vec3 color = vec3(n);
   color = color * 2.;

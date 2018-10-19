@@ -18,8 +18,10 @@ void main()
 {
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
-  float r = random(vec2(uv.y, mod(time, 1.)));
+  float r1 = random(vec2(uv.x, mod(time, 1.)));
+  float r2 = random(vec2(uv.y, mod(time, 1.)));
 
-  gl_FragColor = vec4(vec3(r), 1.);
+  // gl_FragColor = vec4(vec3(r1 * r2), 1.);
+  gl_FragColor = vec4(vec3(step(r1, r2)), 1.);
 
 }

@@ -35,7 +35,7 @@ float morphing(vec2 p)
 void main()
 {
 
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   float d = morphing(uv);
   vec3 color = mix(vec3(1.), vec3(0.), smoothstep(.49, .5, d));
   gl_FragColor = vec4(vec3(color), 1.);

@@ -23,7 +23,7 @@ mat2 rotate2d(float _angle){
 
 void main()
 {
-	vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+	vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
 	uv *= rotate2d(time * 0.25);
 	// uv *= rotate2d(0.0);

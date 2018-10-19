@@ -55,7 +55,7 @@ vec4 render(vec2 p)
 void main()
 {
 
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
   // 01
   // vec2 c = circle(uv);

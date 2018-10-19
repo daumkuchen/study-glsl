@@ -27,7 +27,7 @@ float random(vec2 st)
 void main()
 {
 
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
   // pow
   // float t = fract(time);

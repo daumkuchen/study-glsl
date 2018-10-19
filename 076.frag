@@ -49,7 +49,7 @@ float snoise(vec2 v){
 void main()
 {
 
-  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   vec2 tUv = gl_FragCoord.xy / resolution;
 
   mat2 r = rot2d(time * 2.);

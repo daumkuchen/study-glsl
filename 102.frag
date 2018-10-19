@@ -51,7 +51,7 @@ float fbm ( in vec2 _uv)
 void main()
 {
 
-  // vec2 uv = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
+  // vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
   vec2 uv = gl_FragCoord.xy / resolution.xy * 3.;
   vec3 color = vec3(0.);
