@@ -109,3 +109,5 @@
 * 106 gradient noise wall
 * 107 value noise wall
 * 108 glitch
+* 109 glitch
+* 101 noise
