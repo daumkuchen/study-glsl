@@ -138,20 +138,19 @@ float sdSphere(vec3 p, float s)
 {
 	float modValue = snoise(vec4(1. * normalize(p), .2 * time));
   return length(p) - (s + .5 * modValue);
-	// return length(p) - s;
 }
 
 vec2 map(in vec3 pos)
 {
-  return vec2( sdSphere( pos, 1.0 ), 2.0 );
+  return vec2(sdSphere(pos, 1.), 2.);
 }
 
 vec2 castRay(in vec3 ro, in vec3 rd)
 {
   float tmin = 1.;
-  float tmax = 20.;
+  float tmax = 10.;
 
-	float precis = .001;
+	float precis = 1.;
   float t = tmin;
   float m = -1.;
   for(int i = 0; i < 1; i++)
@@ -168,7 +167,7 @@ vec2 castRay(in vec3 ro, in vec3 rd)
 
 vec3 calcNormal(in vec3 pos)
 {
-	vec3 eps = vec3( 0.25, 0.0, 0.0 );
+	vec3 eps = vec3(.25, 0., 0.);
 	vec3 nor = vec3(
     map(pos+eps.xyy).x - map(pos-eps.xyy).x,
     map(pos+eps.yxy).x - map(pos-eps.yxy).x,
@@ -187,10 +186,10 @@ vec3 render(in vec3 ro, in vec3 rd)
     vec3 pos = ro + t * rd;
     vec3 nor = abs(calcNormal(pos));
     col = vec3(1.);
-    float rim = dot( vec3(0., 0., 1.), nor);
+    float rim = dot(vec3(1., 1., 1.), nor);
     float value = cos( rim * TWO_PI * 20.);
-		// col *= value > .7 ? 1. : 0.;
-    col *= smoothstep(.5, .8, value ); // thank you @iapafoto!
+
+    col *= smoothstep(.1, 1., value );
   }
 	return col;
 }
@@ -223,15 +222,12 @@ void main()
   vec2 p = -1. + 2. * q;
 	p.x *= resolution.x / resolution.y;
 
-	// camera
 	vec3 ro = vec3(0., 0., -5.);
 
-  // ray direction
 	vec3 rd = normalize(vec3(p.xy, 2.));
 
-	// render
   vec3 col = render(ro, rd);
-	col = pow( col, vec3(.4545));
+	col = pow(col, vec3(.5));
   gl_FragColor = vec4(col, 1.);
 
 }
