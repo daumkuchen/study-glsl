@@ -100,7 +100,7 @@
 * 097 morphing sphere(forked)
 * 098 pattern
 * 099 pattern
-* 100 Space Puppy Zebra(forked)
+* 100 space
 * 101 Fractal Brownian
 * 102 Fractal Brownian
 * 103 raymarching
@@ -111,4 +111,4 @@
 * 108 glitch
 * 109 glitch
 * 110 noise
-* 111 Space Puppy Zebra(forked)
+* 111 space
