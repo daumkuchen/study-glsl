@@ -11,7 +11,7 @@ const float PI = 3.14159265;
 const float angle = 60.;
 const float fov = angle * .5 / PI / 180.;
 
-const vec3 lightDir = normalize(vec3(-.5, .5, .5));
+// const vec3 lightDir = normalize(vec3(-.5, .5, .5));
 const vec3 ambient = vec3(.05, .05, .05);
 
 //	Simplex 4D Noise
@@ -146,6 +146,8 @@ vec3 getNormal(vec3 p) {
 void main()
 {
 
+  vec3 lightDir = normalize(vec3(sin(time * 2.), cos(time * 2.), 1.));
+
   vec2 uv = (gl_FragCoord.xy * 2.0 - resolution);
        uv /= min(resolution.x, resolution.y);
 
@@ -175,10 +177,12 @@ void main()
         specular = pow(specular, 12.);
   vec3 ambientColor = min(ambient + diffuse, 1.);
 
-  vec3 col = vec3(1.);
-  float dot = dot(vec3(1.), normal);
+  // vec3 col = vec3(1., .2, .1);
+  vec3 col = vec3(normal);
+  float dot = dot(vec3(.01), normal);
   float value = cos(dot * PI * 16.);
-  col *= smoothstep(.5, 1., value);
+  col *= smoothstep(.1, 1., value);
+  col = abs(col - .1);
 
   // vec3 dest = (col * (ambientColor * 10.)) + vec3(specular);
   vec3 dest = col + vec3(specular);
