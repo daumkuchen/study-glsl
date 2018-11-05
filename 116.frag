@@ -75,15 +75,19 @@ vec3 render(vec2 p)
 {
   float t = time * 2.;
 	vec2 q = p * .6;
-  vec4 on = vec4(0.);
+  vec4 on = vec4(1.);
   float f = func(q, on, t);
 
 	vec3 col = vec3(0.);
-  // col = mix(vec3(.2, .1, .4), vec3(.3, .05, .05), f);
-  col = mix(col, vec3(.9, .9, .9), dot(on.zw, on.zw));
+  col = mix(vec3(.2, .1, .4), vec3(.3, .05, .05), f);
+  // col = mix(col, vec3(.9, .9, .9), dot(on.zw, on.zw));
   // col = mix(col, vec3(.4, .3, .3), .5 * on.y * on.y);
   // col = mix(col, vec3(.0, .2, .4), .5 * smoothstep(1.2, 1.3, abs(on.z) + abs(on.w)));
+	col = mix(col, vec3(1.), dot(on.zw, on.zw));
+  col = mix(col, vec3(1.), .5 * on.y * on.y);
+  col = mix(col, vec3(1.), .5 * smoothstep(1.2, 1.3, abs(on.z) + abs(on.w)));
   col = clamp(col * f * 2., 0., 1.);
+
 
 	// vec3 nor = normalize( vec3( dFdx(f)*resolution.x, 6.0, dFdy(f)*resolution.y ) );
   vec3 nor = normalize(vec3(f * resolution.x, 6., f * resolution.y));
@@ -91,8 +95,10 @@ vec3 render(vec2 p)
   vec3 lig = normalize(vec3(.9, -.2, -.4));
   float dif = clamp(.3 + .7 * dot(nor, lig), 0., 1.);
   vec3 bdrf;
-  bdrf = vec3(.7, .9, .95) * (nor.y * .5 + .5);
-  bdrf += vec3(.15, .10, .05) * dif;
+  // bdrf = vec3(.7, .9, .95) * (nor.y * .5 + .5);
+  // bdrf += vec3(.15, .10, .05) * dif;
+	bdrf = vec3(1.) * (nor.y * .5 + .5);
+  bdrf += vec3(1.) * dif;
   col *= 1.2 * bdrf;
 	col = 1. - col;
 	return 1.1 * col * col;
