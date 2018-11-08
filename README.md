@@ -117,4 +117,5 @@
 * 114 space
 * 115 warping
 * 116 warping
-* 117 random
+* 117 glitch
+* 118 glitch

@@ -20,12 +20,21 @@ void main()
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   vec2 tUv = gl_FragCoord.xy / resolution;
 
-  // float r = random(vec2(tUv.y, mod(time * 1., 1.)));
-  float r = random(tUv + cos(time));
+  float r = random(vec2(tUv.y * .001, mod(time, 10.)));
 
-  vec4 t = texture2D(cat1, vec2(tUv.x + r * .1 - .05, tUv.y));
-  vec3 color = 1. - vec3(t.r, t.g, t.b);
+  // if (r < 0.1) {
+  //   tUv.x += r * .1;
+  // }
 
-  gl_FragColor = vec4(color, 1.);
+  if (r < 0.1) {
+    // gl_FragColor.r += texture2D(cat1, tUv + vec2(0., 0.)).b;
+    // gl_FragColor.b += texture2D(cat1, tUv - vec2(0., 0.)).g;
+  } else if(r > .2 && r < .2){
+    gl_FragColor = texture2D(cat1, tUv);
+  } else{
+    vec4 tex = texture2D(cat1, tUv);
+    vec3 color = 1. - vec3(tex.r, tex.g, tex.b);
+    gl_FragColor = vec4(color, 1.);
+  }
 
 }
