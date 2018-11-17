@@ -119,3 +119,6 @@
 * 116 warping
 * 117 glitch
 * 118 glitch
+* 119 displacement effect
+* 120 displacement effect
+* 121 displacement effect
