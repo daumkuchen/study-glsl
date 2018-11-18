@@ -10,6 +10,12 @@
     },
     "disp": {
       "PATH": "images/displacement.jpg",
-    }
+    },
+    "japan1": {
+      "PATH": "video/japan_1.mp4",
+    },
+    "japan2": {
+      "PATH": "video/japan_2.mp4",
+    },
   },
 }
