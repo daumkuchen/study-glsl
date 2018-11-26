@@ -10,7 +10,8 @@ uniform sampler2D cat1;
 uniform sampler2D cat2;
 uniform sampler2D disp;
 
-void main() {
+void main()
+{
 
 	// float t = exp(-1. * fract(time));
 	// float t = exp(-1. * cos(time));

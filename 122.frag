@@ -48,7 +48,8 @@ float fbm ( in vec2 _uv)
   return v;
 }
 
-void main() {
+void main()
+{
 
 	// float t = exp(-1. * fract(time));
 	// float t = exp(-1. * cos(time));

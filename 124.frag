@@ -39,7 +39,8 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
-void main() {
+void main()
+{
 
 	// float t = exp(-1. * fract(time));
 	// float t = exp(-1. * cos(time));
