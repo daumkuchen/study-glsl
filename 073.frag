@@ -9,7 +9,7 @@ uniform sampler2D backbuffer;
 
 const float num = 5.;
 
-vec4 ball(float i, float j) {
+vec4 ball(float i, float j){
 	float x = resolution.x / 2. * (1. + cos(1. * time + (3. * i + 4. * j)));
 	float y = resolution.y / 2. * (1. + sin(2. * time + (3. * i + 4. * j)));
 	float size = 3. - 2. * sin(time);
@@ -32,8 +32,8 @@ void main()
 {
 
 	vec4 color = vec4(0.0);
-	for (float i = 0.; i < num; ++i) {
-		for (float j = 0.; j < num; ++j) {
+	for (float i = 0.; i < num; ++i){
+		for (float j = 0.; j < num; ++j){
 			color += ball(i, j);
 		}
 	}

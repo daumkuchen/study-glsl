@@ -18,7 +18,7 @@ const float size = 1.0;
 const vec3 lightDir = vec3(-0.5, 0.5, 0.5);
 
 // sphere
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - size;
 }
 

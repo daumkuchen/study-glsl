@@ -79,7 +79,7 @@ vec3 rotate(vec3 p, float angle, vec3 axis){
   return m * p;
 }
 
-vec3 trans(vec3 p, float c) {
+vec3 trans(vec3 p, float c){
   return mod(p, c) - (c * .5);
 }
 
@@ -117,7 +117,7 @@ vec3 opRep( vec3 p, vec3 c )
 //
 // ==================== OBJ
 
-float sdSphere(vec3 p, float s) {
+float sdSphere(vec3 p, float s){
   return length(p) - s;
 }
 
@@ -144,7 +144,7 @@ float sdFloor(vec3 p){
 //
 // ==================== MESH
 
-float distanceFunc(vec3 p) {
+float distanceFunc(vec3 p){
 
   // vec2 res = opU(
   //   vec2(sdPlane(p), 1.),
@@ -168,7 +168,7 @@ float distanceFunc(vec3 p) {
   return min(torus1, floor1);
 }
 
-vec3 getNormal(vec3 p) {
+vec3 getNormal(vec3 p){
   float d = .0001;
   return normalize(vec3(
     distanceFunc(p + vec3( d, .0, .0)) - distanceFunc(p + vec3(-d, .0, .0)),
@@ -193,13 +193,13 @@ void main()
   vec3 cPos = vec3(.0, .0, 50.);
   vec3 rPos = cPos;
 
-  for(int i = 0; i < 128; i++) {
+  for(int i = 0; i < 128; i++){
     d = distanceFunc(rPos);
     rLen += d;
     rPos = cPos + ray * rLen;
   }
 
-  if(abs(d) < .001) {
+  if(abs(d) < .001){
 
     vec3 normal = getNormal(rPos);
 

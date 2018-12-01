@@ -9,8 +9,7 @@ uniform sampler2D backbuffer;
 uniform sampler2D cat1;
 uniform sampler2D cat2;
 
-void main()
-{
+void main(){
 
 	// float t = exp(-1. * fract(time));
 	// float t = exp(-1. * cos(time));
@@ -22,7 +21,7 @@ void main()
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
   vec2 tUv = gl_FragCoord.xy / resolution;
 
-  for(float i = 1.; i < 10.; i++) {
+  for(float i = 1.; i < 10.; i++){
     uv.x += .3 / i * sin(i * 3. * uv.y + (time * .1) + cos((time / (10. * i)) * i));
     uv.y += .4 / i * cos(i * 3. * uv.x + (time * .5) + sin((time / (20. * i)) * i));
   }

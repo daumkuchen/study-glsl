@@ -8,7 +8,7 @@ uniform float time;
 uniform sampler2D backbuffer;
 
 // Simplex 2D noise
-// vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+// vec3 permute(vec3 x){ return mod(((x*34.0)+1.0)*x, 289.0); }
 // float snoise(vec2 v){
 // const vec4 C = vec4(0.211324865405187, 0.366025403784439,
 // -0.577350269189626, 0.024390243902439);

@@ -56,20 +56,20 @@ float smoothMin(float d1, float d2, float k){
 }
 
 // sphere
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - size;
 }
 
 // box
 const float b = 0.75;
 const float r = 0.05;
-float udRoundBox(vec3 p) {
+float udRoundBox(vec3 p){
   return length(max(abs(p)-b,0.0))-r;
 }
 
 // torus
 const vec2 t = vec2(0.75, 0.25);
-float sdTorus(vec3 p) {
+float sdTorus(vec3 p){
   // 横
   // vec2 q = vec2(length(p.xz) - t.x, p.y);
   // 縦
@@ -121,27 +121,27 @@ vec3 getNormal(vec3 p){
   ));
 }
 
-float easeInOutQuad(float t) {
-  if ((t *= 2.0) < 1.0) {
+float easeInOutQuad(float t){
+  if ((t *= 2.0) < 1.0){
     return 0.5 * t * t;
   } else {
     return -0.5 * ((t - 1.0) * (t - 3.0) - 1.0);
   }
 }
 
-float easeInOutCubic(float t) {
-  if ((t *= 2.0) < 1.0) {
+float easeInOutCubic(float t){
+  if ((t *= 2.0) < 1.0){
     return 0.5 * t * t * t;
   } else {
     return 0.5 * ((t -= 2.0) * t * t + 2.0);
   }
 }
 
-float easeInOutExpo(float t) {
-  if (t == 0.0 || t == 1.0) {
+float easeInOutExpo(float t){
+  if (t == 0.0 || t == 1.0){
     return t;
   }
-  if ((t *= 2.0) < 1.0) {
+  if ((t *= 2.0) < 1.0){
     return 0.5 * pow(2.0, 10.0 * (t - 1.0));
   } else {
     return 0.5 * (-pow(2.0, -10.0 * (t - 1.0)) + 2.0);

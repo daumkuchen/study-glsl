@@ -9,7 +9,7 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-void main( void ) {
+void main( void ){
 
   vec2 p = (gl_FragCoord.xy * 2.0 - resolution.xy);
        // p /= min(resolution.x, resolution.y);

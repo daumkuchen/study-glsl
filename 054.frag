@@ -11,7 +11,7 @@ vec2 random2(vec2 p){
   return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
 }
 
-float random(in vec2 st) {
+float random(in vec2 st){
   return fract(sin(dot(st.xy, vec2(12.9898,78.233)))* 43758.5453123);
 }
 
@@ -28,8 +28,8 @@ void main()
 
   float m_dist = 1.0;
 
-  for (int y= -1; y <= 1; y++) {
-    for (int x= -1; x <= 1; x++) {
+  for (int y= -1; y <= 1; y++){
+    for (int x= -1; x <= 1; x++){
 
       vec2 neighbor = vec2(float(x), float(y));
 

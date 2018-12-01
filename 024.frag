@@ -7,7 +7,7 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-float random(vec2 st) {
+float random(vec2 st){
   return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 

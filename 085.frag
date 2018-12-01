@@ -60,7 +60,7 @@ void main()
   // 01
   // vec2 c = circle(uv);
   // vec3 color = vec3(1.);
-  // if(float(c) < .8) {
+  // if(float(c) < .8){
   //   color = vec3(0.);
   // }
   // gl_FragColor = vec4(vec3(color), 1.);

@@ -9,7 +9,7 @@ uniform sampler2D backbuffer;
 uniform sampler2D cat1;
 uniform sampler2D cat2;
 
-float random (in vec2 _uv) {
+float random (in vec2 _uv){
   return fract(sin(dot(_uv.xy,vec2(12.9898,78.233)))*43758.5453123);
 }
 
@@ -40,7 +40,7 @@ float fbm ( in vec2 _uv)
   // Rotate to reduce axial bias
   mat2 rot = mat2(cos(0.5), sin(0.5),
                  -sin(0.5), cos(0.50));
-  for (int i = 0; i < NUM_OCTAVES; ++i) {
+  for (int i = 0; i < NUM_OCTAVES; ++i){
     v += a * noise(_uv);
     _uv = rot * _uv * 2.0 + shift;
     a *= 0.5;

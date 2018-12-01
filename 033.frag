@@ -23,7 +23,7 @@ vec3 trans(vec3 p){
 }
 
 // sphere
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - size;
 }
 

@@ -30,7 +30,7 @@ float fbm (in vec2 p)
   float value = 0.0;
   float amplitud = 0.2;
   float frequency = .9;
-  for (int i = 0; i < OCTAVES; i++) {
+  for (int i = 0; i < OCTAVES; i++){
     value += amplitud * noise(p);
     p *= 2.0;
     amplitud *= 0.8;

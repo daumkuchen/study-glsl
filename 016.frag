@@ -6,13 +6,13 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
 
-float map(vec3 p) {
+float map(vec3 p){
 	return length(mod(p, 2.0) - 1.0) - 0.3;
 }
 
 const float modelSize = 1.0;
 
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - modelSize;
 }
 
@@ -20,7 +20,7 @@ float distanceFunc(vec3 p){
   return length(p) - modelSize;
 }
 
-vec3 getNormal(vec3 p) {
+vec3 getNormal(vec3 p){
   const float d = 0.0001;
   return
     normalize
@@ -34,7 +34,7 @@ vec3 getNormal(vec3 p) {
     );
 }
 
-vec2 rot(vec2 p, float a) {
+vec2 rot(vec2 p, float a){
 	return vec2(
 	cos(a) * p.x - sin(a) * p.y,
 	sin(a) * p.x + cos(a) * p.y);

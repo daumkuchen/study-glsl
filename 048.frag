@@ -57,7 +57,7 @@ float smoothMin(float d1, float d2, float k){
   return -log(h) / k;
 }
 
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - size;
 }
 
@@ -118,7 +118,7 @@ void main()
     vec3 normal = getNormal(rPos);
     float diff = clamp(dot(lightDir, normal), 0.1, 1.0);
 
-    for(float i = 1.0; i < 3.0; i++) {
+    for(float i = 1.0; i < 3.0; i++){
       p.x += 0.2 / i * sin(i * 1.0 * p.y + time * 1.0 + cos((time / (100.0 * i)) * i));
       p.y += 0.4 / i * cos(i * 1.0 * p.x + time * 2.0 + sin((time / (200.0 * i)) * i));
     }
@@ -133,7 +133,7 @@ void main()
 
   } else {
 
-    for(float i = 1.0; i < 3.0; i++) {
+    for(float i = 1.0; i < 3.0; i++){
       p.x += 0.2 / i * sin(i * 1.0 * p.y + time * 1.0 + cos((time / (100.0 * i)) * i));
       p.y += 0.4 / i * cos(i * 1.0 * p.x + time * 2.0 + sin((time / (200.0 * i)) * i));
     }

@@ -19,11 +19,11 @@ vec2 uv, pos, pmouse, uvUnit;
 float aspect;
 bool isLive;
 
-float circle (vec2 center, float radius) {
+float circle (vec2 center, float radius){
   return distance(center, pos) < radius ? 1.0 : 0.0;
 }
 
-float rect (vec2 center, vec2 b) {
+float rect (vec2 center, vec2 b){
   vec2 bMin = center-b;
   vec2 bMax = center+b;
   return (
@@ -32,12 +32,12 @@ float rect (vec2 center, vec2 b) {
     1.0 : 0.0;
 }
 
-int countNeighbors(vec2 p) {
+int countNeighbors(vec2 p){
   int count = 0;
 
   #define KERNEL_R 1
   for (int y=-KERNEL_R; y<=KERNEL_R; ++y)
-  for (int x=-KERNEL_R; x<=KERNEL_R; ++x) {
+  for (int x=-KERNEL_R; x<=KERNEL_R; ++x){
     vec2 spoint = uvUnit*vec2(float(x),float(y));
     if ( texture2D(backbuffer, uv+spoint).a > 0.0 )
       ++count;
@@ -49,11 +49,11 @@ int countNeighbors(vec2 p) {
   return count;
 }
 
-float gameStep() {
+float gameStep(){
   isLive = texture2D(backbuffer, uv).a > 0.0;
   int neighbors = countNeighbors(uv);
 
-  if (isLive) {
+  if (isLive){
     if (neighbors < 2)
       return 0.0;
     else if (neighbors > 3)
@@ -69,7 +69,7 @@ float gameStep() {
   }
 }
 
-vec3 ghosting() {
+vec3 ghosting(){
   #define DECAY 0.90
   return DECAY * texture2D(backbuffer, uv).rgb;
 }

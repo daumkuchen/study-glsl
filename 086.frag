@@ -43,7 +43,7 @@ void main()
 
   vec2 c = circle(uv);
   vec3 color = vec3(1.);
-  if(float(c) < .4) {
+  if(float(c) < .4){
     color = vec3(0.);
   }
   gl_FragColor = vec4(color, 1.);

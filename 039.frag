@@ -76,20 +76,20 @@ float smoothMin(float d1, float d2, float k){
 }
 
 // sphere
-float sdSphere(vec3 p) {
+float sdSphere(vec3 p){
   return length(p) - size;
 }
 
 // box
 const float b = 0.5;
 const float r = 0.05;
-float udRoundBox(vec3 p) {
+float udRoundBox(vec3 p){
   return length(max(abs(p)-b,0.0))-r;
 }
 
 // torus
 const vec2 t = vec2(0.75, 0.25);
-float sdTorus(vec3 p) {
+float sdTorus(vec3 p){
   // 横
   vec2 q = vec2(length(p.xz) - t.x, p.y);
   // 縦

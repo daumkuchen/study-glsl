@@ -11,26 +11,26 @@ uniform sampler2D backbuffer;
 
 // http://glslsandbox.com/e#48525.1
 
-mat2 rotate(float a) {
+mat2 rotate(float a){
 	float c = cos(a);
 	float s = sin(a);
 	return mat2(c, -s, s, c);
 }
 
-float disp(vec3 p) {
+float disp(vec3 p){
 	float f = 16.;
 	float t = time;
 	return .08 * cos(p.x * f + t) * cos(p.z * f + t) * cos(p.y * f + t);
 }
 
-float map(vec3 p) {
+float map(vec3 p){
 	float d = 0.;
 	float k = disp(p);
 	d = length(p) - .5;
 	return d + k;
 }
 
-vec3 normal(vec3 p) {
+vec3 normal(vec3 p){
 	vec3 n, E = vec3(.005, 0., 0.);
 	n.x = map(p + E.xyy) - map(p - E.xyy);
 	n.y = map(p + E.yxy) - map(p - E.yxy);
@@ -58,7 +58,7 @@ void main()
 	vec3 rd = vec3(uv+vec2(ppx,ppy), 1.);
 
 	float t = 0.;
-	for (int i = 0; i < 32; i++) {
+	for (int i = 0; i < 32; i++){
 		vec3 p = ro + rd * t;
 		t += 0.9 * map(p);
 	}

@@ -33,7 +33,7 @@ vec3 rotate(vec3 p, float angle, vec3 axis){
   return m * p;
 }
 
-vec3 trans(vec3 p, float c) {
+vec3 trans(vec3 p, float c){
   return mod(p, c) - (c * .5);
 }
 
@@ -53,7 +53,7 @@ float smoothMin(float d1, float d2, float k){
   return -log(h) / k;
 }
 
-float sdSphere(vec3 p, float s) {
+float sdSphere(vec3 p, float s){
   return length(p) - s;
 }
 
@@ -62,7 +62,7 @@ float sdTorus(vec3 p, vec2 t){
   return length(q)-t.y;
 }
 
-float random (in vec2 _uv) {
+float random (in vec2 _uv){
     return fract(sin(dot(_uv.xy,vec2(12.9898,78.233)))*43758.5453123);
 }
 
@@ -93,7 +93,7 @@ float fbm ( in vec2 _uv)
     // Rotate to reduce axial bias
     mat2 rot = mat2(cos(0.5), sin(0.5),
                     -sin(0.5), cos(0.50));
-    for (int i = 0; i < NUM_OCTAVES; ++i) {
+    for (int i = 0; i < NUM_OCTAVES; ++i){
         v += a * noise(_uv);
         _uv = rot * _uv * 2.0 + shift;
         a *= 0.5;
@@ -101,7 +101,7 @@ float fbm ( in vec2 _uv)
     return v;
 }
 
-float distanceFunc(vec3 p) {
+float distanceFunc(vec3 p){
 
   vec3 r = rotate(p, radians(time * 100.), vec3(1., 1., 1.));
   vec3 t = twist(r, sin(time * 2.));
@@ -113,7 +113,7 @@ float distanceFunc(vec3 p) {
 
 }
 
-vec3 getNormal(vec3 p) {
+vec3 getNormal(vec3 p){
   float d = .0001;
   return normalize(vec3(
     distanceFunc(p + vec3( d, .0, .0)) - distanceFunc(p + vec3(-d, .0, .0)),
@@ -136,13 +136,13 @@ void main()
   vec3 cPos = vec3(.0, .0, 50.);
   vec3 rPos = cPos;
 
-  for(int i = 0; i < 128; i++) {
+  for(int i = 0; i < 128; i++){
     d = distanceFunc(rPos);
     rLen += d;
     rPos = cPos + ray * rLen;
   }
 
-  if(abs(d) < .001) {
+  if(abs(d) < .001){
 
     vec3 normal = getNormal(rPos);
 

@@ -10,7 +10,7 @@ const int octaves = 5;
 const float seed = 43758.5453123;
 const float seed2 = 73156.8473192;
 
-float random(float val) {
+float random(float val){
   return fract(sin(val) * seed);
 }
 
@@ -19,13 +19,13 @@ vec2 random2(vec2 st, float seed){
   return -1.0 + 2.0*fract(sin(st)*seed);
 }
 
-float random2d(vec2 uv) {
+float random2d(vec2 uv){
   return fract(sin(dot(uv.xy,vec2(12.9898, 78.233)))*seed);
 }
 
 // Value Noise by Inigo Quilez - iq/2013
 // https://www.shadertoy.com/view/lsf3WH
-float noise(vec2 st, float seed) {
+float noise(vec2 st, float seed){
   vec2 i = floor(st);
   vec2 f = fract(st);
   vec2 u = f*f*(3.0-2.0*f);
@@ -36,7 +36,7 @@ float noise(vec2 st, float seed) {
 }
 
 // Simplex 2D noise
-vec3 permute(vec3 x) { return mod(((x*34.0)+1.0)*x, 289.0); }
+vec3 permute(vec3 x){ return mod(((x*34.0)+1.0)*x, 289.0); }
 float snoise(vec2 v){
   const vec4 C = vec4(0.211324865405187, 0.366025403784439,
            -0.577350269189626, 0.024390243902439);
@@ -64,17 +64,17 @@ float snoise(vec2 v){
   return 130.0 * dot(m, g);
 }
 
-vec3 plotCircle(vec2 pos, vec2 uv, float size) {
+vec3 plotCircle(vec2 pos, vec2 uv, float size){
   return vec3(smoothstep(size, size + 0.05, length(uv - pos)));
 }
 
-float fbm (in vec2 st, float seed) {
+float fbm (in vec2 st, float seed){
   // Initial values
   float value = 0.0;
   float amplitude = .5;
   float frequency = 0.;
   // Loop of octaves
-  for (int i = octaves; i > 0; i--) {
+  for (int i = octaves; i > 0; i--){
     value += amplitude * abs(noise(st, seed));
     st *= 2.;
     amplitude *= .5;
@@ -82,13 +82,13 @@ float fbm (in vec2 st, float seed) {
   return value;
 }
 
-float fbm2 (in vec2 st, float seed) {
+float fbm2 (in vec2 st, float seed){
   // Initial values
   float value = 0.0;
   float amplitude = .5;
   float frequency = 0.;
   // Loop of octaves
-  for (int i = octaves; i > 0; i--) {
+  for (int i = octaves; i > 0; i--){
     value += amplitude * noise(st, seed);
     st *= 2.;
     amplitude *= .5;
@@ -96,13 +96,13 @@ float fbm2 (in vec2 st, float seed) {
   return value;
 }
 
-float fbm1 (in vec2 st, float seed) {
+float fbm1 (in vec2 st, float seed){
   // Initial values
   float value = 0.0;
   float amplitude = .5;
   float frequency = 0.;
   // Loop of octaves
-  for (int i = octaves; i > 0; i--) {
+  for (int i = octaves; i > 0; i--){
     value += amplitude * fract(noise(st, seed));
     st *= 2.;
     amplitude *= .5;

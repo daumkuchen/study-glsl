@@ -38,7 +38,7 @@ float smoothMin(float d1, float d2, float k){
   return -log(h) / k;
 }
 
-float sdSphere(vec3 p, float s) {
+float sdSphere(vec3 p, float s){
   return length(p) - s;
 }
 
@@ -47,7 +47,7 @@ float sdTorus(vec3 p, vec2 t){
   return length(q)-t.y;
 }
 
-float distanceFunc(vec3 p) {
+float distanceFunc(vec3 p){
   vec3 r = rotate(p, radians(time * 50.), vec3(1., 1., 1.));
 
   float s1 = sdSphere(r, 1.);
@@ -67,7 +67,7 @@ float distanceFunc(vec3 p) {
 
 }
 
-vec3 getNormal(vec3 p) {
+vec3 getNormal(vec3 p){
   float d = .0001;
   return normalize(vec3(
     distanceFunc(p + vec3( d, .0, .0)) - distanceFunc(p + vec3(-d, .0, .0)),
@@ -90,13 +90,13 @@ void main()
   vec3 cPos = vec3(.0, .0, 50.);
   vec3 rPos = cPos;
 
-  for(int i = 0; i < 128; i++) {
+  for(int i = 0; i < 128; i++){
     d = distanceFunc(rPos);
     rLen += d;
     rPos = cPos + ray * rLen;
   }
 
-  if(abs(d) < .001) {
+  if(abs(d) < .001){
 
     vec3 normal = getNormal(rPos);
 

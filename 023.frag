@@ -13,7 +13,7 @@ void main()
     vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
 
     // pale
-    // for(float i = 1.0; i < 3.0; i++) {
+    // for(float i = 1.0; i < 3.0; i++){
     //   p.x += 0.3 / i * sin(i * 3.0 * p.y + time * 0.1 + cos((time / (100. * i)) * i));
     //   p.y += 0.4 / i * cos(i * 3.0 * p.x + time * 2.1 + sin((time / (200. * i)) * i));
     // }
@@ -22,7 +22,7 @@ void main()
     // float b = r + g * 2.0;
 
     // hard
-    for(float i = 1.0; i < 10.0; i++) {
+    for(float i = 1.0; i < 10.0; i++){
       p.x += 0.3 / i * sin(i * 3.0 * p.y + (time * 0.1) + cos((time / (10.0 * i)) * i));
       p.y += 0.4 / i * cos(i * 3.0 * p.x + (time * 0.5) + sin((time / (20.0 * i)) * i));
     }

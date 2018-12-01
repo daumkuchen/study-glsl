@@ -7,11 +7,11 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-vec2 tex(vec2 uv) {
+vec2 tex(vec2 uv){
     return texture2D(backbuffer, uv).xy - 0.5;
 }
 
-void main( void ) {
+void main( void ){
 
   // vec2 pos = (gl_FragCoord.xy * 2.0 - resolution) / resolution.x - mouse.xy + 0.5;
 

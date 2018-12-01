@@ -7,7 +7,7 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-vec2 random2(vec2 p) {
+vec2 random2(vec2 p){
   return fract(sin(vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))))*43758.5453);
 }
 
@@ -21,8 +21,8 @@ void main()
   vec2 f_p = fract(p);
 
   float m_dip = 1.0;
-  for (int y= -1; y <= 1; y++) {
-    for (int x= -1; x <= 1; x++) {
+  for (int y= -1; y <= 1; y++){
+    for (int x= -1; x <= 1; x++){
       vec2 neighbor = vec2(float(x),float(y));
       vec2 point = random2(i_p + neighbor);
       point = 0.5 + 0.5 * sin((time * 0.5) + 10.0 * point);

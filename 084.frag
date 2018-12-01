@@ -56,7 +56,7 @@ mat3 rotZ(float a)
 //
 // ==================== OBJ
 
-float sdSphere(vec3 p, float s) {
+float sdSphere(vec3 p, float s){
   return length(p) - s;
 }
 
@@ -65,7 +65,7 @@ float sdTorus(vec3 p, vec2 t){
   return length(q)-t.y;
 }
 
-float sdBox( vec3 p, vec3 b ) {
+float sdBox( vec3 p, vec3 b ){
   return length(max(abs(p)-b,0.0));
 }
 

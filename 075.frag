@@ -55,7 +55,7 @@ mat3 rotZ(float a)
 //
 // ==================== OBJ
 
-float sdSphere(vec3 p, float s) {
+float sdSphere(vec3 p, float s){
   return length(p) - s;
 }
 

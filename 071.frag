@@ -37,7 +37,7 @@ float m(vec2 uv, float t)
 	return (1.0-length(fuv))*result;
 }
 
-void main(void) {
+void main(void){
 
 	vec2 uv = (gl_FragCoord.xy * 2. -resolution.xy) / min(resolution.x, resolution.y);
 	vec2 luv = gl_FragCoord.xy / resolution.xy - 0.5;

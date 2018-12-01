@@ -72,8 +72,8 @@ float iSphere( in vec3 ro, in vec3 rd, in vec4 sp, out vec3 nor )
 	return t;
 }
 
-vec3 getPosition( float time ) { return vec3(     2.5*sin(8.0*time), 0.0,      1.0*cos(8.0*time) ); }
-vec3 getVelocity( float time ) { return vec3( 8.0*2.5*cos(8.0*time), 0.0, -8.0*1.0*sin(8.0*time) ); }
+vec3 getPosition( float time ){ return vec3(     2.5*sin(8.0*time), 0.0,      1.0*cos(8.0*time) ); }
+vec3 getVelocity( float time ){ return vec3( 8.0*2.5*cos(8.0*time), 0.0, -8.0*1.0*sin(8.0*time) ); }
 
 void main()
 {

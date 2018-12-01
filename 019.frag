@@ -13,7 +13,7 @@ float map(
 		float beforeMax,
 		float afterMin,
 		float afterMax
-	) {
+	){
 	return afterMin + (afterMax - afterMin) * ((value - beforeMin) / (beforeMax - beforeMin));
 }
 
@@ -40,7 +40,7 @@ void main()
 
   float offset = map(sin(time * 3.0), -1.0, 1.0, 0.6, 0.9);
 
-  if (dist < offset) {
+  if (dist < offset){
     newUv -= 0.5;
 
     float radius = 0.4;

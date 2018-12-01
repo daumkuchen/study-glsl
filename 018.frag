@@ -6,17 +6,17 @@ uniform vec2 resolution;
 uniform vec2 mouse;
 uniform float time;
 
-float map(vec3 p) {
+float map(vec3 p){
 	return length(mod(p, 2.0) - 1.0) - 0.3;
 }
 
-vec2 rot(vec2 p, float a) {
+vec2 rot(vec2 p, float a){
 	return vec2(
 	cos(a) * p.x - sin(a) * p.y,
 	sin(a) * p.x + cos(a) * p.y);
 }
 
-void main( void ) {
+void main( void ){
 	vec2 uv = ( gl_FragCoord.xy / resolution.xy ) * 2.0 - 1.0;
 
 	uv.x *= resolution.x / resolution.y;
@@ -27,7 +27,7 @@ void main( void ) {
 	dir.zy = rot(dir.zy, time * 0.05);
 
 	float t = 0.0;
-	for(int i = 0 ; i < 75; i++) {
+	for(int i = 0 ; i < 75; i++){
 		t += map(t * dir + pos);
 	}
 

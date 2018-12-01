@@ -22,7 +22,7 @@ void main()
 
   float r = random(vec2(tUv.y, mod(time, 10.)));
 
-  if (r < .1) {
+  if (r < .1){
 
     tUv.x -= r * 10.;
 

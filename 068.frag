@@ -60,7 +60,7 @@ float blur(in vec2 p){
 
 // The reaction diffusion loop.
 //
-void main( void ) {
+void main( void ){
 
 	vec2 uv = gl_FragCoord/iResolution.xy; // Screen coordinates. Range: [0, 1]
   vec2 pw = 1./iResolution.xy; // Relative pixel width. Used for neighboring pixels, etc.

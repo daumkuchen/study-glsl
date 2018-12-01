@@ -7,11 +7,11 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-float random(vec2 st) {
+float random(vec2 st){
   return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
 }
 
-float noise(vec2 st) {
+float noise(vec2 st){
     vec2 i = floor(st);
     vec2 f = fract(st);
     vec2 u = f*f*(3.0-2.0*f);

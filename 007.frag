@@ -8,7 +8,7 @@ uniform float time;
 
 float pi = 3.14159265;
 
-float rnd(vec3 p) {
+float rnd(vec3 p){
   vec3 i = floor(p);
   vec4 a = dot(i, vec3(1., 57., 21.)) + vec4(0., 57., 21., 78.);
   vec3 f = cos((p - i) * pi * 10.0) * (-.5) + .5;

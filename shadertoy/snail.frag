@@ -56,7 +56,7 @@ float sdBox( vec3 p, vec3 b )
 }
 
 // http://research.microsoft.com/en-us/um/people/hoppe/ravg.pdf
-float det( vec2 a, vec2 b ) { return a.x*b.y-b.x*a.y; }
+float det( vec2 a, vec2 b ){ return a.x*b.y-b.x*a.y; }
 vec3 getClosest( vec2 b0, vec2 b1, vec2 b2 )
 {
     float a =     det(b0,b2);
@@ -184,7 +184,7 @@ float mapShell( in vec3 p, out vec4 matInfo )
     float d2 = sqrt( (r2-r)*(r2-r) + h2*h2) - r2;
 
     float d, dx, dy;
-    if( d1<d2 ) { d = d1; dx=r1-r; dy=h1; }
+    if( d1<d2 ){ d = d1; dx=r1-r; dy=h1; }
     else        { d = d2; dx=r2-r; dy=h2; }
 
 
@@ -332,7 +332,7 @@ vec2 mapOpaque( vec3 p, out vec4 matInfo )
     //---------------
     vec4 tmpMatInfo;
     float d4 = mapShell( p, tmpMatInfo );
-    if( d4<res.x  ) { res = vec2(d4,2.0); matInfo = tmpMatInfo; }
+    if( d4<res.x  ){ res = vec2(d4,2.0); matInfo = tmpMatInfo; }
 
     //---------------
 
@@ -340,7 +340,7 @@ vec2 mapOpaque( vec3 p, out vec4 matInfo )
     vec4 b3 = sdBezier( vec3(-0.15,-1.5,0.0), vec3(-0.1,0.5,0.0), vec3(-0.6,1.5,0.0), p );
     d4 = b3.x;
     d4 -= 0.04 - 0.02*b3.y;
-    if( d4<res.x  ) { res = vec2(d4,3.0); }
+    if( d4<res.x  ){ res = vec2(d4,3.0); }
 
 	//----------------------------
 

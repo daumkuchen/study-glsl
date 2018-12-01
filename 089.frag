@@ -14,7 +14,7 @@ vec3 diskWithMotionBlur( vec3 col, in vec2 uv, in vec3 sph, in vec2 cd, in vec3 
 	float b = dot(cd,xc);
 	float c = dot(xc,xc) - sph.z*sph.z;
 	float h = b*b - a*c;
-	if( h>0.0 ) {
+	if( h>0.0 ){
 		h = sqrt( h );
 
 		float ta = max( 0.0, (-b - h)/a );
@@ -26,16 +26,16 @@ vec3 diskWithMotionBlur( vec3 col, in vec2 uv, in vec3 sph, in vec2 cd, in vec3 
 	return col;
 }
 
-vec3 hash3( float n ) { return fract(sin(vec3(n,n+1.0,n+2.0))*43758.5453123); }
-vec4 hash4( float n ) { return fract(sin(vec4(n,n+1.0,n+2.0,n+3.0))*43758.5453123); }
+vec3 hash3( float n ){ return fract(sin(vec3(n,n+1.0,n+2.0))*43758.5453123); }
+vec4 hash4( float n ){ return fract(sin(vec4(n,n+1.0,n+2.0,n+3.0))*43758.5453123); }
 
 const float speed = 8.0;
 
-vec2 getPosition(float time, vec4 id) {
+vec2 getPosition(float time, vec4 id){
 	return vec2(0.9*sin((speed*(0.75+0.5*id.z))*time+20.0*id.x), 0.75*cos(speed*(0.75+0.5*id.w)*time+20.0*id.y));
 }
 
-vec2 getVelocity( float time, vec4 id ) {
+vec2 getVelocity( float time, vec4 id ){
 	return vec2(speed*0.9*cos((speed*(0.75+0.5*id.z))*time+20.0*id.x), -speed*0.75*sin(speed*(0.75+0.5*id.w)*time+20.0*id.y));
 }
 

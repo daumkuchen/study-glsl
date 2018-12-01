@@ -8,7 +8,7 @@ uniform float time;
 uniform sampler2D backbuffer;
 
 // rotate 2D
-vec2 rotate(vec2 v, float a) {
+vec2 rotate(vec2 v, float a){
 	float s = sin(a);
 	float c = cos(a);
 	mat2 m = mat2(c, -s, s, c);

@@ -116,7 +116,7 @@ float sdSphere(vec3 p, float s)
   return length(p) - s;
 }
 
-// float distanceFunc(vec3 p) {
+// float distanceFunc(vec3 p){
 vec2 distanceFunc(vec3 p)
 {
   float n = snoise(vec4(normalize(p), time * .5));
@@ -125,7 +125,7 @@ vec2 distanceFunc(vec3 p)
   return vec2(s);
 }
 
-vec3 getNormal(vec3 p) {
+vec3 getNormal(vec3 p){
 
   vec3 d = vec3(.2, 0., 0.);
   return normalize(vec3(
@@ -160,14 +160,14 @@ void main()
   vec3 rPos = cPos;
 
   // 128
-  for(int i = 0; i < 16; i++) {
+  for(int i = 0; i < 16; i++){
     d = distanceFunc(rPos);
     rLen += d;
     // rPos = cPos + ray * rLen;
     rPos = cPos + ray * vec3(rLen, 1.);
   }
 
-  // if(abs(d) < .001) {}
+  // if(abs(d) < .001){}
 
   vec3 normal = getNormal(rPos);
   float diffuse = max(dot(lightDir, normal), 0.);

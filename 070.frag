@@ -28,7 +28,7 @@ float SEA_TIME = 0.;
 mat2 octave_m = mat2(1.6,1.2,-1.2,1.6);
 
 // math
-mat3 fromEuler(vec3 ang) {
+mat3 fromEuler(vec3 ang){
 	vec2 a1 = vec2(sin(ang.x),cos(ang.x));
   vec2 a2 = vec2(sin(ang.y),cos(ang.y));
   vec2 a3 = vec2(sin(ang.z),cos(ang.z));
@@ -39,12 +39,12 @@ mat3 fromEuler(vec3 ang) {
 	return m;
 }
 
-float hash( vec2 p ) {
+float hash( vec2 p ){
 	float h = dot(p,vec2(127.1,311.7));
   return fract(sin(h)*43758.5453123);
 }
 
-float noise( in vec2 p ) {
+float noise( in vec2 p ){
   vec2 i = floor(p);
   vec2 f = fract(p);
 	vec2 u = f*f*(3.0-2.0*f);
@@ -55,17 +55,17 @@ float noise( in vec2 p ) {
 }
 
 // lighting
-float diffuse(vec3 n,vec3 l,float p) {
+float diffuse(vec3 n,vec3 l,float p){
     return pow(dot(n,l) * 0.1 + 0.6,p);
 }
 
-float specular(vec3 n,vec3 l,vec3 e,float s) {
+float specular(vec3 n,vec3 l,vec3 e,float s){
   float nrm = (s + 8.0) / (3.1415 * 8.0);
   return pow(max(dot(reflect(e,n),l),0.0),s) * nrm;
 }
 
 // sky
-vec3 getSkyColor(vec3 e) {
+vec3 getSkyColor(vec3 e){
   e.y = max(e.y,0.0);
   vec3 ret;
   ret.x = pow(1.0-e.y,2.0);
@@ -75,7 +75,7 @@ vec3 getSkyColor(vec3 e) {
 }
 
 // sea
-float sea_octave(vec2 uv, float choppy) {
+float sea_octave(vec2 uv, float choppy){
   uv += noise(uv);
   vec2 wv = 1.0-abs(sin(uv));
   vec2 swv = abs(cos(uv));
@@ -83,14 +83,14 @@ float sea_octave(vec2 uv, float choppy) {
   return pow(1.0-pow(wv.x * wv.y,0.65),choppy);
 }
 
-float map(vec3 p) {
+float map(vec3 p){
   float freq = SEA_FREQ;
   float amp = SEA_HEIGHT;
   float choppy = SEA_CHOPPY;
   vec2 uv = p.xz; uv.x *= 0.75;
 
   float d, h = 0.0;
-  for(int i = 0; i < ITER_GEOMETRY; i++) {
+  for(int i = 0; i < ITER_GEOMETRY; i++){
   	d = sea_octave((uv+SEA_TIME)*freq,choppy);
   	d += sea_octave((uv-SEA_TIME)*freq,choppy);
       h += d * amp;
@@ -100,14 +100,14 @@ float map(vec3 p) {
   return p.y - h;
 }
 
-float map_detailed(vec3 p) {
+float map_detailed(vec3 p){
   float freq = SEA_FREQ;
   float amp = SEA_HEIGHT;
   float choppy = SEA_CHOPPY;
   vec2 uv = p.xz; uv.x *= 0.75;
 
   float d, h = 0.0;
-  for(int i = 0; i < ITER_FRAGMENT; i++) {
+  for(int i = 0; i < ITER_FRAGMENT; i++){
   	d = sea_octave((uv+SEA_TIME)*freq,choppy);
   	d += sea_octave((uv-SEA_TIME)*freq,choppy);
       h += d * amp;
@@ -117,7 +117,7 @@ float map_detailed(vec3 p) {
   return p.y - h;
 }
 
-vec3 getSeaColor(vec3 p, vec3 n, vec3 l, vec3 eye, vec3 dist) {
+vec3 getSeaColor(vec3 p, vec3 n, vec3 l, vec3 eye, vec3 dist){
   float fresnel = 1.0 - max(dot(n,-eye),0.0);
   fresnel = pow(fresnel,3.0) * 0.65;
 
@@ -135,7 +135,7 @@ vec3 getSeaColor(vec3 p, vec3 n, vec3 l, vec3 eye, vec3 dist) {
 }
 
 // tracing
-vec3 getNormal(vec3 p, float eps) {
+vec3 getNormal(vec3 p, float eps){
   vec3 n;
   n.y = map_detailed(p);
   n.x = map_detailed(vec3(p.x+eps,p.y,p.z)) - n.y;
@@ -144,18 +144,18 @@ vec3 getNormal(vec3 p, float eps) {
   return normalize(n);
 }
 
-float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
+float heightMapTracing(vec3 ori, vec3 dir, out vec3 p){
   float tm = 0.0;
   float tx = 1000.0;
   float hx = map(ori + dir * tx);
   if(hx > 0.0) return tx;
   float hm = map(ori + dir * tm);
   float tmid = 0.0;
-  for(int i = 0; i < NUM_STEPS; i++) {
+  for(int i = 0; i < NUM_STEPS; i++){
 	  tmid = mix(tm,tx, hm/(hm-hx));
 	  p = ori + dir * tmid;
 	  float hmid = map(p);
-		if(hmid < 0.0) {
+		if(hmid < 0.0){
 	  	tx = tmid;
 	    hx = hmid;
 	  } else {
@@ -167,7 +167,7 @@ float heightMapTracing(vec3 ori, vec3 dir, out vec3 p) {
 }
 
 // main
-void main( void ) {
+void main( void ){
 	EPSILON_NRM = 0.1 / resolution.x;
 	SEA_TIME = time * SEA_SPEED;
 
