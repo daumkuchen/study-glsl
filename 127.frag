@@ -11,8 +11,9 @@ void main(){
 
   vec2 uv = (gl_FragCoord.xy * 2. - resolution) / min(resolution.x, resolution.y);
 
-  uv = fract(uv * 4.) * 2. - 1.;
+  uv = fract(uv * 8.) * 2. - 1.;
   uv.x += pow(sin(time), 2.);
+
   float l = 1. - length(uv);
 
   vec4 dest = vec4(vec3(l), 1.);
