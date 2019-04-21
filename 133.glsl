@@ -1,6 +1,6 @@
 void mainImage(out vec4 fragColor, in vec2 p) {
 
-    float reso = 8.;
+    float reso = 4.;
 
     vec2 cell = floor(p * reso);
     vec2 center = (cell + .5) / reso;
@@ -11,12 +11,10 @@ void mainImage(out vec4 fragColor, in vec2 p) {
     float l = distance(p, center);
     float r = (.4 + sin(t) * .4) / reso;
 
-    float br1 = smoothstep(0., .005, l - r);
-    float br2 = smoothstep(-.005, 0., r - l);
-    vec3 rgb = vec3(br1 * br2 * reso);
+    vec3 rgb = vec3((l - r) * reso);
 
     fragColor = vec4(rgb, 1.);
-
+    
 }
 
 void main() {

@@ -1,14 +1,6 @@
-#ifdef GL_ES
-precision mediump float;
-#endif
-
 #define PI 3.141592
 #define TAU (PI*2.0)
 #define RATIO .125
-
-uniform vec2 resolution;
-uniform float time;
-uniform vec2 mouse;
 
 mat2 rot(float th) {
     vec2 a = sin(vec2(1.570796, 0.) + th);
@@ -52,28 +44,33 @@ float sdEyelid2(vec2 p) {
     );
 }
 
-void mainImage( out vec4 fragColor, in vec2 p ) {
+void mainImage(out vec4 fragColor, in vec2 p) {
 
+    p *= rot(iTime * .8);
+    
     vec3 col;
     vec3 colBlack = vec3(0., 0., 0.);
     vec3 colWhite = vec3(1., 1., 1.);
     vec3 colYellow = vec3(.9411, .8627, .1568);
 
-    col = colYellow;
-    col = mix(col, colBlack, smoothstep(.01, 0., sdBody(p)));
-    col = mix(col, colWhite, smoothstep(.01, 0., sdEye1(p)));
-    col = mix(col, colBlack, smoothstep(.01, 0., sdEye2(p)));
-    col = mix(col, colYellow, smoothstep(.01, 0., sdEyelid1(p)));
-    col = mix(col, colBlack, smoothstep(.01, 0., sdEyelid2(p)));
+    float ss = 3. / min(iResolution.x, iResolution.y);
 
-    fragColor = vec4(col,1.);
+    col = colYellow;
+    col = mix(col, colBlack, smoothstep(ss, 0., sdBody(p)));
+    col = mix(col, colWhite, smoothstep(ss, 0., sdEye1(p)));
+    col = mix(col, colBlack, smoothstep(ss, 0., sdEye2(p)));
+    col = mix(col, colYellow, smoothstep(ss, 0., sdEyelid1(p)));
+    col = mix(col, colBlack, smoothstep(ss, 0., sdEyelid2(p)));
+
+    fragColor = vec4(col, 1.);
 
 }
 
-void main(void) {
-    vec2 uv = (gl_FragCoord.xy * 2. - resolution.xy) / min(resolution.x, resolution.y);
-    uv *= rot(time * .8);
+void main() {
+
+    vec2 p = (gl_FragCoord.xy * 2. - iResolution.xy) / min(iResolution.x, iResolution.y);
     vec4 col;
-    mainImage(col, uv);
+    mainImage(col, p);
     gl_FragColor = col;
+
 }
