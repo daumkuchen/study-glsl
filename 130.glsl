@@ -15,7 +15,7 @@ float remap(float value, float inputMin, float inputMax, float outputMin, float 
 
 const float PI = 3.14159265358979323846;
 
-void main() {
+void main(){
 
   vec2 tUv = gl_FragCoord.xy / resolution.xy;
 

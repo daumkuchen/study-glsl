@@ -7,7 +7,7 @@ uniform vec2 mouse;
 uniform float time;
 uniform sampler2D backbuffer;
 
-void main() {
+void main(){
 
   vec2 tUv = gl_FragCoord.xy - resolution / 2.;
        tUv = vec2(length(tUv) / resolution.y - .3, atan(tUv.x, tUv.y));

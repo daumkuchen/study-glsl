@@ -203,7 +203,7 @@ void mainImage(out vec4 fragColor, in vec2 p) {
     
 }
 
-void main() {
+void main(){
 
     vec2 p = (gl_FragCoord.xy * 2. - iResolution.xy) / min(iResolution.x, iResolution.y);
     vec4 col;

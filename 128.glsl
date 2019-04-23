@@ -125,7 +125,7 @@ vec3 render(in vec3 ro, in vec3 rd) {
   return pow(col, vec3(0.4545));
 }
 
-void main() {
+void main(){
 
   vec2 p = -1. + 2. * gl_FragCoord.xy / resolution.xy;
   p.x *= resolution.x / resolution.y;

@@ -9,7 +9,7 @@ uniform sampler2D backbuffer;
 
 #extension GL_OES_standard_derivatives : enable
 
-void main() {
+void main(){
 
   // 画面左から x = 0.4, 0.5, 0.6
 
