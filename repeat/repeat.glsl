@@ -1,4 +1,10 @@
 
+vec3 hsv(float h, float s, float v){
+    vec4 t = vec4(1., 2. / 3., 1. / 3., 3.);
+    vec3 p = abs(fract(vec3(h) + t.xyz) * 6. - vec3(t.w));
+    return v * mix(vec3(t.x), clamp(p - vec3(t.x), 0., 1.), s);
+}
+
 vec2 collapseUV(vec2 p, float t) {
     float s = sin(t);
     float c = cos(t);
@@ -23,6 +29,9 @@ void mainImage(out vec4 fragColor, in vec2 p) {
 
     // collapse
     // p = collapseUV(p, iTime);
+    // p = collapseUV(p, iTime);
+    // p = collapseUV(p, iTime);
+    // p = collapseUV(p, iTime);
     // float l = 1. - length(p);
 
 
@@ -38,7 +47,9 @@ void mainImage(out vec4 fragColor, in vec2 p) {
 
     float ss = 3. / min(iResolution.x, iResolution.y);
     l = smoothstep(0., ss, l);
-    vec3 rgb = vec3(l);
+    
+    // vec3 rgb = vec3(l);
+    vec3 rgb = hsv(l, l, 1.);
 
     fragColor = vec4(rgb, 1.);
     
@@ -47,6 +58,7 @@ void mainImage(out vec4 fragColor, in vec2 p) {
 void main(){
 
     vec2 p = (gl_FragCoord.xy * 2. - iResolution.xy) / min(iResolution.x, iResolution.y);
+
     vec4 col;
     mainImage(col, p);
     gl_FragColor = col;
