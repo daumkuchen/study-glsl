@@ -1,15 +1,10 @@
-#iChannel0 file://./_image/cat_01.jpg
-
 void mainImage(out vec4 fragColor, in vec2 p) {
 
-    // direction:x
-    p.x = p.y + abs(sin(iTime * 20.));
+    // float t = iTime;
+    float t = .75;
 
-    // direction:y
-    // p.y = p.x + abs(cos(iTime * 20.));
-
-    vec4 tex = texture2D(iChannel0, p);
-    fragColor = tex;
+    vec3 col = sin(p.x * 3.) * .5 + sin(p.y * 8. * t) * .5 * sin(t + p.xyx + vec3(0., 2., 4.));
+    fragColor = vec4(col, 1.);
     
 }
 
