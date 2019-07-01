@@ -1,10 +1,17 @@
 #iChannel0 file://./_image/cat_01.jpg
 
+float random(vec2 co){
+    return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+}
+
+
 void mainImage(out vec4 fragColor, in vec2 p) {
 
     // direction:x
-    p.x = p.y + abs(sin(iTime * 20.));
-
+    if(p.y > random(p)){
+        p.x = p.y + abs(sin(iTime * 20.));
+    }
+    
     // direction:y
     // p.y = p.x + abs(cos(iTime * 20.));
 

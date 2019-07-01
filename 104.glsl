@@ -136,7 +136,7 @@ void main()
   vec3 cPos = vec3(.0, .0, 50.);
   vec3 rPos = cPos;
 
-  for(int i = 0; i < 128; i++){
+  for(int i = 0; i < 64; i++){
     d = distanceFunc(rPos);
     rLen += d;
     rPos = cPos + ray * rLen;
@@ -153,7 +153,8 @@ void main()
 
     vec3 ambientColor = min(ambient + diffuse, 1.);
 
-    vec3 color = vec3(.1) + vec3(uv + cos(time) * .2, 1.);
+    //  vec3 color = vec3(.1) + vec3(uv + cos(time) * .2, 1.);
+    vec3 color = vec3(.9);
 
     vec3 dest = (color * ambientColor) + vec3(specular);
 
